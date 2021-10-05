@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Recape
 {
@@ -6,6 +7,6 @@ namespace Recape
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public Especialidade Especialidade { get; set; }
+        public List<Especialidade> Especialidade { get; set; }
     }
 }
