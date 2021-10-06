@@ -1,6 +1,12 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+nav {
+    background: #E95225;
+    color: white;
+    font-weight: 500;
+}
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -11,7 +17,6 @@ a.navbar-brand {
 }
 
 
-
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -19,9 +24,9 @@ a {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #214291;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -70,23 +75,58 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    background: #E95225;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
-/* ESTILOS PERSONALIZADOS */
-#cards-home-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-  
+/*HOME PAGE*/
+#cards-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    margin-top: 100px;
 }
 
-nav {
-  background: #FF4A1C;
-  color: white;
-  font-weight: 500;
+#founders {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    margin-top: 110px;
+}
+
+#founders .card {
+    border: none;
+}
+
+#contact-info {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.card-img {
+    border-radius: 10em;
+}
+
+#divisor {
+    margin-top: 100px;
+}
+
+#cards-container .card {
+    background-color: #214291;
+    border: none;
+    color: white;
+}
+
+#cards-container a:hover {
+    text-decoration: none;
+}
+
+#contact-info-container {
+    margin-bottom: 50px;
 }
