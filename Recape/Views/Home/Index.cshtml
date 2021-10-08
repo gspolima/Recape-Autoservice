@@ -22,7 +22,7 @@
 
 <section id="servicos">
     <div id="servicos-container">
-        <a asp-controller="Agendamentos" asp-action="ListarAgendamentos">
+        <a class="text-decoration-none" asp-controller="Agendamentos" asp-action="ListarAgendamentos">
             <div class="card" style="width: 18rem;">
                 <img loading="lazy" src="~/img/home-atendimento.jpg" class="card-img-top" alt="..." width="286" height="250">
                 <div class="card-body">
@@ -32,7 +32,7 @@
             </div>
         </a>
 
-        <a>
+        <a class="text-decoration-none">
             <div class="card" style="width: 18rem;">
                 <img loading="lazy" src="~/img/home-bus.jpg" class="card-img-top" alt="..." width="286" height="250">
                 <div class="card-body">
@@ -42,7 +42,7 @@
             </div>
         </a>
 
-        <a href="#contato">
+        <a class="text-decoration-none" href="#contato">
             <div class="card" style="width: 18rem;">
                 <img loading="lazy" src="~/img/home-contato.jpg" class="card-img-top" width="286" height="250" alt="...">
                 <div class="card-body">
@@ -85,28 +85,31 @@
 
 <section id="contato">
     <div id="contato-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1990.55082234598!2d-38.480346501980286!3d-3.7880492160213763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c7458b85fffbc1%3A0x6235bbed04f25cdf!2sWSTC%20%7C%20SOHO!5e0!3m2!1sen!2sbr!4v1633548736510!5m2!1sen!2sbr" width="600" height="550" style="border-radius: 1em;" allowfullscreen="" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.252295495474!2d-38.490122939709046!3d-3.755160181365639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74963201865ff%3A0x2d77cda38272811f!2sShopping%20Iguatemi%20Fortaleza!5e0!3m2!1sen!2sbr!4v1633723625697!5m2!1sen!2sbr" width="600" height="500" style="border:0; border-radius: 2em;" allowfullscreen="" loading="lazy"></iframe>
 
-        <div id="contact-form">
+        <div>
             <h2>Contate-nos</h2>
-            <form>
+            <form id="contato-form">
                 <div class="form-group">
                     <label for="nome">Seu Nome</label>
-                    <input type="text" class="form-control form-control-lg" id="nome">
+                    <input type="text" class="form-control form-control" id="nome" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Seu Email</label>
-                    <input type="email" class="form-control form-control-lg" id="email" aria-describedby="emailHelp">
+                    <input type="email" class="form-control form-control" id="email" aria-describedby="emailHelp" required>
                 </div>
                 <div class="form-group">
                     <label for="assunto">Assunto</label>
-                    <input type="text" class="form-control form-control-lg" id="assunto" placeholder="">
+                    <input type="text" class="form-control form-control" id="assunto" required>
                 </div>
                 <div class="form-group">
                     <label for="mensagem">Mensagem</label>
-                    <textarea class="form-control form-control-lg" id="mensagem" rows="4"></textarea>
+                    <textarea class="form-control form-control" id="mensagem" rows="4" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button id="mensagem-enviar" type="submit" class="btn btn-primary">Enviar</button>
+                <span id="mensagem-sucesso" class="float-right alert alert-success small font-weight-bold" role="alert">
+                    Enviado!
+                </span>
             </form>
         </div>
     </div>

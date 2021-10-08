@@ -67,8 +67,7 @@ section {
 }
 
     #servicos a:hover {
-        color: #ffd1bf;
-        text-decoration: none;
+        color: #c7c4c3;
     }
 
 #fundadores {
@@ -79,7 +78,7 @@ section {
     #fundadores #fundadores-container {
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-evenly;
+        justify-content: space-around;
     }
 
 #fundadores-container .card {
@@ -99,5 +98,6 @@ section {
     #contato #contato-container {
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-around;
+        justify-content: space-evenly;
     }
+
