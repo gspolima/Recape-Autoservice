@@ -1,0 +1,103 @@
+﻿body {
+    color: white;
+    background-image: url(../img/home-servicos-fundo.jpg);
+    background-attachment: fixed;
+}
+
+/*HOME PAGE*/
+section {
+    border-radius: 2em;
+}
+
+    section#fundadores {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    section#contato {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+#introducao {
+    background-color: #3D518C;
+    padding: 100px 0;
+}
+
+    #introducao #introducao-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+        #introducao #introducao-container #descricao {
+            max-width: 30em;
+        }
+
+        #introducao #introducao-container #acoes a {
+            font-size: 1.1em;
+        }
+
+#servicos {
+    padding: 140px 0;
+}
+
+#servicos-container {
+    margin-right: 0;
+    margin-left: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+#servicos .card {
+    border-radius: 1em;
+    background-color: #214291;
+    border: none;
+}
+
+#servicos .card-img-top {
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em
+}
+
+#servicos a {
+    color: white;
+}
+
+    #servicos a:hover {
+        color: #ffd1bf;
+        text-decoration: none;
+    }
+
+#fundadores {
+    background-color: #3D518C;
+    padding: 100px 0;
+}
+
+    #fundadores #fundadores-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+    }
+
+#fundadores-container .card {
+    border: none;
+    background-color: transparent;
+}
+
+#fundadores-container .card-img {
+    border-radius: 3.2em;
+}
+
+#contato {
+    background-color: #3D518C;
+    padding: 100px 0;
+}
+
+    #contato #contato-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+    }

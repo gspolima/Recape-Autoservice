@@ -1,10 +1,12 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+/*Navbar*/
 nav {
     background: #E95225;
     color: white;
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 1.05em;
 }
 
 a.navbar-brand {
@@ -12,10 +14,9 @@ a.navbar-brand {
     text-align: center;
     word-break: break-all;
     font-family: 'Arvo', serif;
-    font-weight: bold;
-    font-size: 1.5em;
+    font-weight: 700;
+    font-size: 1.1em;
 }
-
 
 /* Provide sufficient contrast against white background */
 a {
@@ -65,8 +66,8 @@ button.accept-policy {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -75,7 +76,7 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 .footer {
-    background: #E95225;
+    background: #db5137;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -83,50 +84,8 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 
-/*HOME PAGE*/
-#cards-container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-    margin-top: 100px;
-}
+/*Bootstrap Overrides*/
 
-#founders {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-    margin-top: 110px;
-}
-
-#founders .card {
-    border: none;
-}
-
-#contact-info {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    margin-top: 40px;
-}
-
-.card-img {
-    border-radius: 10em;
-}
-
-#divisor {
-    margin-top: 100px;
-}
-
-#cards-container .card {
-    background-color: #214291;
-    border: none;
-    color: white;
-}
-
-#cards-container a:hover {
-    text-decoration: none;
-}
-
-#contact-info-container {
-    margin-bottom: 50px;
+.btn-primary {
+    background-color: #db5137;
 }

@@ -2,43 +2,64 @@
     ViewData["Title"] = "Início";
 }
 
-<section id="cards-container">
-    <a asp-controller="Agendamentos" asp-action="ListarAgendamentos">
-        <div class="card" style="width: 18rem;">
-            <img src="~/img/home-atendimento.jpg" class="card-img-top" alt="..." width="286" height="250">
-            <div class="card-body">
-                <h5 class="card-title">Consultas Agendadadas</h5>
-                <p class="card-text">Marque um horário com um de nossos profissionais</p>
-            </div>
+<section id="introducao">
+    <div id="introducao-container">
+        <div id="logo">
+            <img loading="lazy" src="~/img/home-logo.png" width="350" height="350" style="border-radius: 18em" />
         </div>
-    </a>
-
-    <div class="card" style="width: 18rem;">
-        <img src="~/img/home-bus.jpg" class="card-img-top" alt="..." width="286" height="250">
-        <div class="card-body">
-            <h5 class="card-title">Compra de Passagens</h5>
-            <p class="card-text">Reserve assentos numa frota de veículos pensada para o seu comforto</p>
+        <div id="apresentacao">
+            <div id="descricao">
+                <h1>Somos a Recape!</h1>
+                <p>Oferecemos serviços em agendamento de consultas médicas e viagens rodoviárias</p>
+            </div>
+            <div id="acoes">
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary">Cadastre-se</a>
+                <a href="#servicos" class="btn btn-primary">Conheça nossos serviços</a>
+            </div>
         </div>
     </div>
-    <a href="#contact-info">
-        <div class="card" style="width: 18rem;">
-            <img src="~/img/home-contato.jpg" class="card-img-top" width="286" height="250" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Contato</h5>
-                <p class="card-text">Saiba como nos contactar</p>
-            </div>
-        </div>
-    </a>
-
 </section>
 
-<section id="contact-info-container">
+<section id="servicos">
+    <div id="servicos-container">
+        <a asp-controller="Agendamentos" asp-action="ListarAgendamentos">
+            <div class="card" style="width: 18rem;">
+                <img loading="lazy" src="~/img/home-atendimento.jpg" class="card-img-top" alt="..." width="286" height="250">
+                <div class="card-body">
+                    <h5 class="card-title">Consultas Agendadadas</h5>
+                    <p class="card-text">Marque um horário com um de nossos profissionais</p>
+                </div>
+            </div>
+        </a>
 
-    <div id="founders" class="text-center">
+        <a>
+            <div class="card" style="width: 18rem;">
+                <img loading="lazy" src="~/img/home-bus.jpg" class="card-img-top" alt="..." width="286" height="250">
+                <div class="card-body">
+                    <h5 class="card-title">Compra de Passagens</h5>
+                    <p class="card-text">Reserve assentos numa frota de veículos pensada para o seu comforto</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="#contato">
+            <div class="card" style="width: 18rem;">
+                <img loading="lazy" src="~/img/home-contato.jpg" class="card-img-top" width="286" height="250" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Contato</h5>
+                    <p class="card-text">Saiba como nos contactar</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+<section id="fundadores">
+    <div id="fundadores-container" class="text-center">
         <div class="card mb-3" style="max-width: 20em;">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img src="~/img/home-gustavo.jpg" class="card-img" alt="...">
+                    <img loading="lazy" src="~/img/home-gustavo.jpg" class="card-img" alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body align-middle">
@@ -50,7 +71,7 @@
         <div class="card mb-3" style="max-width: 20em;">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img src="~/img/home-juan.jpg" class="card-img" alt="...">
+                    <img loading="lazy" src="~/img/home-juan.jpg" class="card-img" alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body align-middle">
@@ -60,9 +81,11 @@
             </div>
         </div>
     </div>
-    <hr />
-    <div id="contact-info">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1990.55082234598!2d-38.480346501980286!3d-3.7880492160213763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c7458b85fffbc1%3A0x6235bbed04f25cdf!2sWSTC%20%7C%20SOHO!5e0!3m2!1sen!2sbr!4v1633548736510!5m2!1sen!2sbr" width="750" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+</section>
+
+<section id="contato">
+    <div id="contato-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1990.55082234598!2d-38.480346501980286!3d-3.7880492160213763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c7458b85fffbc1%3A0x6235bbed04f25cdf!2sWSTC%20%7C%20SOHO!5e0!3m2!1sen!2sbr!4v1633548736510!5m2!1sen!2sbr" width="600" height="550" style="border-radius: 1em;" allowfullscreen="" loading="lazy"></iframe>
 
         <div id="contact-form">
             <h2>Contate-nos</h2>
@@ -88,3 +111,5 @@
         </div>
     </div>
 </section>
+
+<link rel="stylesheet" type="text/css" href="~/css/home.css" />
