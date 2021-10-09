@@ -1,4 +1,4 @@
-﻿
+﻿@model AgendamentosViewModel
 @{
     ViewData["Title"] = "Agendamentos";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,4 +8,6 @@
 <p>
     Aqui serão listados os agendamentos criados para este usuário.
 </p>
+
+<h3>@Model.UserId</h3>
 
