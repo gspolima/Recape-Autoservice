@@ -1,5 +1,3 @@
-using System;
-
 namespace Recape
 {
     public class Especialidade
