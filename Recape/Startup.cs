@@ -36,9 +36,10 @@ namespace Recape
                 {
                     options.Password.RequiredLength = 8;
                     options.Password.RequireDigit = true;
-                    options.Password.RequireLowercase = true;
-                    options.Password.RequireUppercase = false;
+                    options.User.RequireUniqueEmail = true;
                     options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
                 }
             );
 
