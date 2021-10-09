@@ -40,6 +40,7 @@ namespace Recape
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
+                    options.Lockout.AllowedForNewUsers = false;
                 }
             );
 
