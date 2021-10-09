@@ -11,15 +11,18 @@ namespace Recape.Data
         {
         }
 
+        public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Especialidade> Especialidades { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.Entity<Especialidade>()
-            //    .Property(p => p.Nome)
-            //    .IsRequired();
+            builder.Entity<Especialidade>()
+                .Property(p => p.Nome)
+                .IsRequired();
 
-            //builder.Entity<Medico>()
-            //    .Property(p => p.Nome)
-            //    .IsRequired();
+            builder.Entity<Medico>()
+                .Property(p => p.Nome)
+                .IsRequired();
 
             base.OnModelCreating(builder);
         }
