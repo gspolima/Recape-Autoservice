@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Recape.Models;
+using Recape.ViewModels;
 using System.Diagnostics;
 
 namespace Recape.Controllers

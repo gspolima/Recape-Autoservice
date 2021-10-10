@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Recape.Data;
+using Recape.Data.Repository;
 using System;
 
 namespace Recape
@@ -27,6 +28,10 @@ namespace Recape
                     Configuration.GetConnectionString("DbConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddScoped<IMedicoRepository, MedicoRepository>();
+            services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
+            services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
 
             services.AddDefaultIdentity<IdentityUser>(options =>
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(50))

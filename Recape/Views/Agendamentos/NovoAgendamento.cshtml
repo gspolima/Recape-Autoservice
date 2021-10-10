@@ -1,0 +1,50 @@
+﻿@model NovoAgendamentoViewModel
+
+@{
+    ViewData["Title"] = "Novo Agendamento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Novo Agendamento</h1>
+<hr />
+
+<div class="col-sm-5">
+    <form asp-controller="Agendamentos" asp-action="NovoAgendamento" method="post">
+        <div class="form-group">
+            <label asp-for="MedicoId">Médico</label>
+            <select class="form-control"
+                    asp-for="MedicoId"
+                    asp-items="Model.MedicosEspecialidades">
+                <option>Selecione um médico</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Data">Data</label>
+            <input type="date" asp-for="Data" class="form-control" />
+        </div>
+        <div>
+            <label>Horário</label>
+        </div>
+        <div class="form-group d-flex flex-row flex-wrap">
+            @for (int i = 8; i <= 18; i++)
+            {
+                <div class="col-3">
+                    <input type="radio" id="@i-opcao" name="horario" value="@i:00:00" asp-for="Horario" class="form-control-sm" />
+                    <label for="@i-opcao" class="align-bottom">@i:00</label>
+                </div>
+            }
+        </div>
+        <input type="submit" class="btn btn-primary" value="Agendar" />
+    </form>
+</div>
+
+<style>
+    div.col-3:hover {
+        background-color: lightgray;
+        border-radius: 0.5em;
+    }
+
+    label {
+        font-weight: bold;
+    }
+</style>

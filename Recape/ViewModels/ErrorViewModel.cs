@@ -1,6 +1,4 @@
-using System;
-
-namespace Recape.Models
+namespace Recape.ViewModels
 {
     public class ErrorViewModel
     {
