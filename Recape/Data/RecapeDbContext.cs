@@ -1,18 +1,37 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Recape.Models;
 
 namespace Recape.Data
 {
     public class RecapeDbContext : IdentityDbContext<IdentityUser>
     {
-        public RecapeDbContext(DbContextOptions<RecapeDbContext> options)
+        private readonly IConfiguration configuration;
+
+        public RecapeDbContext(
+            DbContextOptions<RecapeDbContext> options,
+            IConfiguration configuration)
             : base(options)
         {
+            this.configuration = configuration;
         }
 
-        public DbSet<Medico> Medicos { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder
+                    .UseSqlServer(configuration.GetConnectionString("DbConnection"))
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            }
+
+            base.OnConfiguring(optionsBuilder);
+        }
+
+        public DbSet<Medico> Medicos
+        { get; set; }
         public DbSet<Especialidade> Especialidades { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
 

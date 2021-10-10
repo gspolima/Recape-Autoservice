@@ -5,8 +5,6 @@ namespace Recape.Data.Repository
 {
     public interface IMedicoRepository
     {
-        IQueryable<Medico> GetMedicos();
-
-        Medico GetMedicoComEspecialidade(int medicoId);
+        IQueryable<MedicoInfo> GetMedicos();
     }
 }

@@ -13,22 +13,18 @@ namespace Recape.Data.Repository
             this.dbContext = dbContext;
         }
 
-        public IQueryable<Medico> GetMedicos()
+        public IQueryable<MedicoInfo> GetMedicos()
         {
             var results = dbContext.Medicos
-                .Include(m => m.Especialidade);
+                .Include(m => m.Especialidade)
+                .Select(m => new MedicoInfo()
+                {
+                    Id = m.Id,
+                    Nome = m.Nome,
+                    Especialidade = m.Especialidade.Nome
+                });
 
             return results;
-        }
-
-        public Medico GetMedicoComEspecialidade(int medicoId)
-        {
-            var medico = dbContext.Medicos
-                .Where(m => m.Id == medicoId)
-                .Include(a => a.Especialidade)
-                .FirstOrDefault();
-
-            return medico;
         }
     }
 }
