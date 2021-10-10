@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Recape
+namespace Recape.Models
 {
     public class Especialidade
     {

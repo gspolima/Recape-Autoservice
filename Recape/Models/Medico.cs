@@ -1,4 +1,4 @@
-namespace Recape
+namespace Recape.Models
 {
     public class Medico
     {
