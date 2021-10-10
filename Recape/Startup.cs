@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Recape.Data;
 using Recape.Data.Repository;
 using System;
@@ -24,8 +25,19 @@ namespace Recape
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RecapeDbContext>(options =>
+            {
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DbConnection")));
+                    Configuration.GetConnectionString("DbConnection"))
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                .EnableSensitiveDataLogging()
+                .LogTo(
+                    Console.WriteLine,
+                    new[]
+                    {
+                        DbLoggerCategory.Database.Command.Name
+                    },
+                    LogLevel.Information);
+            });
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

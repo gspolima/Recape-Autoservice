@@ -32,25 +32,22 @@ namespace Recape.Controllers
         [Authorize]
         public IActionResult ListarAgendamentos()
         {
-            var userId = userManager.GetUserId(User);
-            var agendamentos = agendamentoRepository.GetAgendamentos(userId);
+            var usuarioId = userManager.GetUserId(User);
+            var agendamentos = agendamentoRepository.GetAgendamentos(usuarioId);
 
             var viewModel = new List<AgendamentoViewModel>();
 
             foreach (var agend in agendamentos)
             {
-                var medico = medicoRepository
-                    .GetMedicoComEspecialidade(agend.MedicoId);
-
                 viewModel.Add(
                     new AgendamentoViewModel()
                     {
                         Id = agend.Id,
                         Paciente = agend.Paciente,
-                        Medico = medico,
+                        Medico = agend.Medico,
                         Data = agend.DataHorario.ToString("dd/MM/yyyy"),
                         Horario = agend.DataHorario.ToString("HH:mm")
-                    });
+                    }); ;
             }
 
             return View(viewModel);
@@ -67,7 +64,7 @@ namespace Recape.Controllers
                     m => new SelectListItem()
                     {
                         Value = m.Id.ToString(),
-                        Text = $"{m.Nome} -- {m.Especialidade.Nome}"
+                        Text = $"{m.Nome} -- {m.Especialidade}"
                     })
                 .ToList();
 
