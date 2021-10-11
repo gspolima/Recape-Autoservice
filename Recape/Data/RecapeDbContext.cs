@@ -30,13 +30,23 @@ namespace Recape.Data
             base.OnConfiguring(optionsBuilder);
         }
 
-        public DbSet<Medico> Medicos
-        { get; set; }
-        public DbSet<Especialidade> Especialidades { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
+        public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Especialidade> Especialidades { get; set; }
+        public DbSet<Reserva> Reservas { get; set; }
+        public DbSet<Viagem> Viagens { get; set; }
+        public DbSet<Poltrona> Poltronas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Agendamento>()
+                .Property(p => p.DataHorario)
+                .IsRequired();
+
+            builder.Entity<Agendamento>()
+                .Property(p => p.PacienteId)
+                .IsRequired();
+
             builder.Entity<Especialidade>()
                 .Property(p => p.Nome)
                 .IsRequired();
@@ -45,12 +55,26 @@ namespace Recape.Data
                 .Property(p => p.Nome)
                 .IsRequired();
 
-            builder.Entity<Agendamento>()
-                .Property(p => p.DataHorario)
+            builder.Entity<Viagem>()
+                .Property(r => r.Origem)
+                .HasMaxLength(40)
                 .IsRequired();
 
-            builder.Entity<Agendamento>()
-                .Property(p => p.PacienteId)
+            builder.Entity<Viagem>()
+                .Property(r => r.Destino)
+                .HasMaxLength(40)
+                .IsRequired();
+
+            builder.Entity<Viagem>()
+                .Property(r => r.Preco)
+                .IsRequired();
+
+            builder.Entity<Viagem>()
+                .Property(r => r.DataPartida)
+                .IsRequired();
+
+            builder.Entity<Viagem>()
+                .Property(r => r.DuracaoEmHoras)
                 .IsRequired();
 
             base.OnModelCreating(builder);
