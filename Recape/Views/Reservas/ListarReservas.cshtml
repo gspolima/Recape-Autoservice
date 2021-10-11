@@ -1,0 +1,14 @@
+﻿@model List<ReservaViewModel>
+@{
+    ViewData["Title"] = "Reservas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Reservas</h1>
+
+<ul class="list-group">
+    @foreach (var reserva in Model)
+    {
+        <li class="list-group-item">@reserva.Id -- @reserva.Cliente.UserName -- @reserva.Poltrona.Numero -- @reserva.Poltrona.Viagem.Origem/@reserva.Poltrona.Viagem.Destino -- @reserva.Poltrona.Disponivel</li>
+    }
+</ul>
