@@ -44,6 +44,7 @@ namespace Recape
             services.AddScoped<IMedicoRepository, MedicoRepository>();
             services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
             services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
+            services.AddScoped<IReservaRepository, ReservaRepository>();
 
             services.AddDefaultIdentity<IdentityUser>(options =>
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(50))
