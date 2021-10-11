@@ -34,13 +34,13 @@ namespace Recape.Data.Repository
         public bool CriarAgendamento(Agendamento agendamento)
         {
             dbContext.Add(agendamento);
-            var registrosInseridos = dbContext.SaveChanges();
-            return registrosInseridos == 1 ? true : false;
+            var registroInserido = dbContext.SaveChanges();
+            return registroInserido == 1 ? true : false;
         }
 
         public bool ExcluirAgendamento(int agendamentoId)
         {
-            var registrosDeletados = 0;
+            var registroDeletado = 0;
             var agendamento = dbContext.Agendamentos
                 .Where(a => a.Id == agendamentoId)
                 .FirstOrDefault();
@@ -48,10 +48,10 @@ namespace Recape.Data.Repository
             if (agendamento != null)
             {
                 dbContext.Remove(agendamento);
-                registrosDeletados = dbContext.SaveChanges();
+                registroDeletado = dbContext.SaveChanges();
             }
 
-            return registrosDeletados == 1 ? true : false;
+            return registroDeletado == 1 ? true : false;
         }
 
     }
