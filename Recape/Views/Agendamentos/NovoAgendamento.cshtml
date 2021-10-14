@@ -10,9 +10,11 @@
 
 <div class="col-sm-5">
     <form asp-controller="Agendamentos" asp-action="NovoAgendamento" method="post">
-        <small class="text-danger">* todos os campos são obrigatórios</small>
+        <div class="alert alert-info" role="alert">
+            Todos os campos são obrigatórios
+        </div>
         <div class="form-group">
-            <label asp-for="MedicoId">Médico</label>
+            <label asp-for="MedicoId">Médico<span class="text-danger">*</span></label>
             <select class="form-control"
                     asp-for="MedicoId"
                     asp-items="Model.MedicosEspecialidades">
@@ -21,14 +23,12 @@
             <span asp-validation-for="@Model.MedicoId" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Data">Data</label>
+            <label asp-for="Data">Data<span class="text-danger">*</span></label>
             <input type="date" asp-for="Data" class="form-control" />
             <span asp-validation-for="@Model.Data" class="text-danger"></span>
         </div>
-        <div>
-            <label>Horário</label>
-        </div>
         <div class="form-group">
+            <label>Horário<span class="text-danger">*</span></label>
             <div class="d-flex flex-row flex-wrap">
                 @for (int i = 8; i <= 18; i++)
                 {
