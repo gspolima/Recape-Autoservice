@@ -5,14 +5,26 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <a class="nav-link text-light">Usuário: @UserManager.GetUserName(User)</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @UserManager.GetUserName(User)
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item text-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Identity/Account/Login")">Sair</a>
+            </div>
         </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Identity/Account/Login")">
-                <button type="submit" class="nav-link btn btn-outline-info text-light">Sair</button>
-            </form>
-        </li>
+
+
+
+
+        @*<li class="nav-item">
+                    <a class="nav-link text-light">Usuário: @UserManager.GetUserName(User)</a>
+                </li>
+            <li class="nav-item">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Identity/Account/Login")">
+                    <button type="submit" class="nav-link btn btn-outline-info text-light">Sair</button>
+                </form>
+            </li>*@
     }
     else
     {
