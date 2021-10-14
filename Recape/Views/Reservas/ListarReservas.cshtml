@@ -6,9 +6,17 @@
 
 <h1>Reservas</h1>
 
-<ul class="list-group">
+<div class="list-group">
     @foreach (var reserva in Model)
     {
-        <li class="list-group-item">@reserva.Id -- @reserva.Cliente.UserName -- @reserva.Poltrona.Numero -- @reserva.Poltrona.Viagem.Origem/@reserva.Poltrona.Viagem.Destino -- @reserva.Poltrona.Disponivel</li>
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-auto justify-content-between">
+                <h5 class="mb-1">Poltrona @reserva.Poltrona.Numero - De @reserva.Poltrona.Viagem.Origem para @reserva.Poltrona.Viagem.Destino</h5>
+                <b>R$ @reserva.Poltrona.Viagem.Preco</b>
+            </div>
+            <p class="mb-1">Parte em @reserva.DataPartida às @reserva.HorarioPartida</p>
+            <small>Duração: @reserva.Poltrona.Viagem.DuracaoEmHoras Horas</small>
+        </a>
     }
-</ul>
+</div>
+
