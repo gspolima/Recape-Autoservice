@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Recape.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Recape.Data.Repository
@@ -15,7 +14,7 @@ namespace Recape.Data.Repository
             this.dbContext = dbContext;
         }
 
-        public List<Agendamento> GetAgendamentos(string usuarioId)
+        public IQueryable<Agendamento> GetAgendamentos(string usuarioId)
         {
             var results = dbContext.Agendamentos
                 .Where(a => a.PacienteId == usuarioId && a.DataHorario >= DateTime.Today)
@@ -23,8 +22,7 @@ namespace Recape.Data.Repository
                 .Include(a => a.Medico)
                 .Include(a => a.Medico.Especialidade)
                 .OrderBy(a => a.DataHorario)
-                .ThenBy(a => a.Id)
-                .ToList();
+                .ThenBy(a => a.Id);
 
             return results;
         }

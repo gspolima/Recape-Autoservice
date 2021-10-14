@@ -10,29 +10,35 @@
 
 <div class="col-sm-5">
     <form asp-controller="Agendamentos" asp-action="NovoAgendamento" method="post">
+        <small class="text-danger">* todos os campos são obrigatórios</small>
         <div class="form-group">
             <label asp-for="MedicoId">Médico</label>
             <select class="form-control"
                     asp-for="MedicoId"
                     asp-items="Model.MedicosEspecialidades">
-                <option>Selecione um médico</option>
+                <option></option>
             </select>
+            <span asp-validation-for="@Model.MedicoId" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Data">Data</label>
             <input type="date" asp-for="Data" class="form-control" />
+            <span asp-validation-for="@Model.Data" class="text-danger"></span>
         </div>
         <div>
             <label>Horário</label>
         </div>
-        <div class="form-group d-flex flex-row flex-wrap">
-            @for (int i = 8; i <= 18; i++)
-            {
-                <div class="col-3">
-                    <input type="radio" id="@i-opcao" name="horario" value="@i:00:00" asp-for="Horario" class="form-control-sm" />
-                    <label for="@i-opcao" class="align-bottom">@i:00</label>
-                </div>
-            }
+        <div class="form-group">
+            <div class="d-flex flex-row flex-wrap">
+                @for (int i = 8; i <= 18; i++)
+                {
+                    <div class="col-3">
+                        <input type="radio" id="@i-opcao" name="horario" value="@i:00:00" asp-for="Horario" class="form-control-sm" />
+                        <label for="@i-opcao" class="align-bottom">@i:00</label>
+                    </div>
+                }
+            </div>
+            <span asp-validation-for="@Model.Horario" class="text-danger"></span>
         </div>
         <input type="submit" class="btn btn-primary" value="Agendar" />
     </form>

@@ -1,11 +1,11 @@
 ﻿using Recape.Models;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Recape.Data.Repository
 {
     public interface IAgendamentoRepository
     {
-        List<Agendamento> GetAgendamentos(string usuarioId);
+        IQueryable<Agendamento> GetAgendamentos(string usuarioId);
 
         bool CriarAgendamento(Agendamento agendamento);
 
