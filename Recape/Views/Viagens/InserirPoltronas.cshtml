@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Semear Viagens com Poltronas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model InserirPoltronasViewModel
+
+@if (Model.bancoDeDadosSemeado == true)
+{
+    <h3>Banco de dados já está semeado com poltronas. Zero registros afetados</h3>
+}
+else
+{
+    <h2>Inserindo poltronas no banco de dados...</h2>
+    @if (Model.sucessoOperacao)
+    {
+        <p>Semeado com sucesso</p>
+        <p>Registros afetados: @Model.poltronasInseridas</p>
+    }
+}
