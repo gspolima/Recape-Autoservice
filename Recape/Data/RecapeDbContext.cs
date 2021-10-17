@@ -81,87 +81,89 @@ namespace Recape.Data
                 .Property(r => r.DuracaoEmHoras)
                 .IsRequired();
 
+            builder.Entity<Especialidade>()
+                .HasData(
+                    new Especialidade()
+                    {
+                        Id = 1,
+                        Nome = "Pediatria"
+                    },
+                    new Especialidade()
+                    {
+                        Id = 2,
+                        Nome = "Cardiologia"
+                    },
+                    new Especialidade()
+                    {
+                        Id = 4,
+                        Nome = "Pneumologia"
+                    },
+                    new Especialidade()
+                    {
+                        Id = 5,
+                        Nome = "Clínica Geral"
+                    },
+                    new Especialidade()
+                    {
+                        Id = 6,
+                        Nome = "Oftalmologia"
+                    },
+                    new Especialidade()
+                    {
+                        Id = 7,
+                        Nome = "Ortopedia"
+                    }
+                );
+
             builder.Entity<Medico>()
                 .HasData(
                     new Medico()
                     {
                         Id = 1,
                         Nome = "Dra. Adama Cadaval",
-                        Especialidade = new Especialidade()
-                        {
-                            Id = 1,
-                            Nome = "Pediatria"
-                        }
+                        EspecialidadeId = 1
                     },
                     new Medico()
                     {
                         Id = 2,
                         Nome = "Dr. Raúl Abelho",
-                        Especialidade = new Especialidade()
-                        {
-                            Id = 2,
-                            Nome = "Cardiologia"
-                        }
+                        EspecialidadeId = 2
                     },
                     new Medico()
                     {
                         Id = 3,
                         Nome = "Dr. Ismael Veleda",
-                        Especialidade = new Especialidade()
-                        {
-                            Id = 4,
-                            Nome = "Pneumologia"
-                        }
+                        EspecialidadeId = 4
                     },
                     new Medico()
                     {
                         Id = 4,
                         Nome = "Dr. Alberto Mourão",
-                        Especialidade = new Especialidade()
-                        {
-                            Id = 2,
-                            Nome = "Cardiologia"
-                        }
+                        EspecialidadeId = 2
                     },
                     new Medico()
                     {
                         Id = 5,
                         Nome = "Dr. Teófilo Saldanha",
-                        Especialidade = new Especialidade()
-                        {
-                            Id = 6,
-                            Nome = "Oftalmologia"
-                        }
+                        EspecialidadeId = 6
                     },
                     new Medico()
                     {
                         Id = 6,
                         Nome = "Dr. Rúben Medeiros",
-                        Especialidade = new Especialidade()
-                        {
-                            Id = 7,
-                            Nome = "Ortopedia"
-                        }
+                        EspecialidadeId = 7
                     },
                     new Medico()
                     {
                         Id = 7,
                         Nome = "Dra. Adriana Rosário",
-                        Especialidade = new Especialidade()
-                        {
-                            Id = 2,
-                            Nome = "Cardiologia"
-                        }
+                        EspecialidadeId = 2
                     },
                     new Medico()
                     {
                         Id = 8,
                         Nome = "Dr. Arthur Nazário",
-                        Especialidade = new Especialidade()
-                        {
-                            Id = 5,
-                            Nome = "Clínica Geral"
-                        }
+                        EspecialidadeId = 5
                     }
                 );
 
