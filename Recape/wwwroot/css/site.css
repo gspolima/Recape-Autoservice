@@ -89,3 +89,7 @@ body {
 .btn-primary {
     background-color: #db5137;
 }
+
+.dropdown-item:focus, .dropdown-item:hover {
+    background-color: #e3e3e3;
+}

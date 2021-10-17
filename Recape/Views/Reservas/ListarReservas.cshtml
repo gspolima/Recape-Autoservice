@@ -5,6 +5,8 @@
 }
 
 <h1>Reservas</h1>
+<hr />
+<button id="novaReserva" class="btn btn-success" asp-controller="Reservas" asp-action="NovaReservas">Nova Reserva</button>
 
 <div class="list-group">
     @foreach (var reserva in Model)
@@ -20,3 +22,8 @@
     }
 </div>
 
+<style>
+    #novaReserva {
+        margin-bottom: 1em;
+    }
+</style>
