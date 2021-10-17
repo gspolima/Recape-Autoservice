@@ -26,11 +26,12 @@ namespace Recape.Data.Repository
             for (int i = 1; i <= viagensCount; i++)
             {
                 var viagem = dbContext.Viagens
+                    .AsTracking()
                     .Include(v => v.Poltronas)
                     .FirstOrDefault(v => v.Id == i);
 
                 if (viagem.Poltronas.Count != 0)
-                    return 0;
+                    continue;
 
                 for (byte p = 1; p <= 40; p++)
                 {
@@ -43,11 +44,11 @@ namespace Recape.Data.Repository
                         });
                 }
 
-                poltronasInseridas = dbContext.SaveChanges();
-
                 if (poltronasInseridas == 40)
                     logger.Log(LogLevel.Information, $"Inseridas as poltronas para a viagem {viagem.Id}");
             }
+
+            poltronasInseridas = dbContext.SaveChanges();
 
             return poltronasInseridas;
         }
