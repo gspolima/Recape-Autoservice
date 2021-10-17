@@ -41,6 +41,7 @@ namespace Recape
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            services.AddScoped<IViagemRepository, ViagemRepository>();
             services.AddScoped<IMedicoRepository, MedicoRepository>();
             services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
             services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();

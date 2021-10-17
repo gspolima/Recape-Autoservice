@@ -2,20 +2,24 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Recape.Models;
+using System;
 
 namespace Recape.Data
 {
     public class RecapeDbContext : IdentityDbContext<IdentityUser>
     {
         private readonly IConfiguration configuration;
+        private readonly ILogger<RecapeDbContext> logger;
 
         public RecapeDbContext(
             DbContextOptions<RecapeDbContext> options,
-            IConfiguration configuration)
-            : base(options)
+            IConfiguration configuration,
+            ILogger<RecapeDbContext> logger) : base(options)
         {
             this.configuration = configuration;
+            this.logger = logger;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -76,6 +80,130 @@ namespace Recape.Data
             builder.Entity<Viagem>()
                 .Property(r => r.DuracaoEmHoras)
                 .IsRequired();
+
+            builder.Entity<Medico>()
+                .HasData(
+                    new Medico()
+                    {
+                        Id = 1,
+                        Nome = "Dra. Adama Cadaval",
+                        Especialidade = new Especialidade()
+                        {
+                            Id = 1,
+                            Nome = "Pediatria"
+                        }
+                    },
+                    new Medico()
+                    {
+                        Id = 2,
+                        Nome = "Dr. Raúl Abelho",
+                        Especialidade = new Especialidade()
+                        {
+                            Id = 2,
+                            Nome = "Cardiologia"
+                        }
+                    },
+                    new Medico()
+                    {
+                        Id = 3,
+                        Nome = "Dr. Ismael Veleda",
+                        Especialidade = new Especialidade()
+                        {
+                            Id = 4,
+                            Nome = "Pneumologia"
+                        }
+                    },
+                    new Medico()
+                    {
+                        Id = 4,
+                        Nome = "Dr. Alberto Mourão",
+                        Especialidade = new Especialidade()
+                        {
+                            Id = 2,
+                            Nome = "Cardiologia"
+                        }
+                    },
+                    new Medico()
+                    {
+                        Id = 5,
+                        Nome = "Dr. Teófilo Saldanha",
+                        Especialidade = new Especialidade()
+                        {
+                            Id = 6,
+                            Nome = "Oftalmologia"
+                        }
+                    },
+                    new Medico()
+                    {
+                        Id = 6,
+                        Nome = "Dr. Rúben Medeiros",
+                        Especialidade = new Especialidade()
+                        {
+                            Id = 7,
+                            Nome = "Ortopedia"
+                        }
+                    },
+                    new Medico()
+                    {
+                        Id = 7,
+                        Nome = "Dra. Adriana Rosário",
+                        Especialidade = new Especialidade()
+                        {
+                            Id = 2,
+                            Nome = "Cardiologia"
+                        }
+                    },
+                    new Medico()
+                    {
+                        Id = 8,
+                        Nome = "Dr. Arthur Nazário",
+                        Especialidade = new Especialidade()
+                        {
+                            Id = 5,
+                            Nome = "Clínica Geral"
+                        }
+                    }
+                );
+
+            builder.Entity<Viagem>()
+                .HasData(
+                    new Viagem()
+                    {
+                        Id = 1,
+                        Origem = "Fortaleza",
+                        Destino = "Recife",
+                        Preco = 120,
+                        DataPartida = new DateTime(2021, 10, 25, 16, 20, 00),
+                        DuracaoEmHoras = 28
+                    },
+                    new Viagem()
+                    {
+                        Id = 2,
+                        Origem = "Fortaleza",
+                        Destino = "Juazeiro do Norte",
+                        Preco = 90,
+                        DataPartida = new DateTime(2021, 10, 23, 06, 00, 00),
+                        DuracaoEmHoras = 20
+                    },
+                    new Viagem()
+                    {
+                        Id = 3,
+                        Origem = "Salvador",
+                        Destino = "Belo Horizonte",
+                        Preco = 100,
+                        DataPartida = new DateTime(2021, 11, 02, 22, 30, 00),
+                        DuracaoEmHoras = 24
+                    },
+                    new Viagem()
+                    {
+                        Id = 4,
+                        Origem = "Porto Alegre",
+                        Destino = "Brasília",
+                        Preco = 180,
+                        DataPartida = new DateTime(2021, 11, 05, 19, 00, 00),
+                        DuracaoEmHoras = 36
+                    }
+                );
 
             base.OnModelCreating(builder);
         }

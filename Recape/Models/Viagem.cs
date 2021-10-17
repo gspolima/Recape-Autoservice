@@ -11,6 +11,6 @@ namespace Recape.Models
         public double Preco { get; set; }
         public DateTime DataPartida { get; set; }
         public float DuracaoEmHoras { get; set; }
-        public List<Poltrona> Poltronas { get; set; }
+        public List<Poltrona> Poltronas { get; set; } = new List<Poltrona>();
     }
 }
