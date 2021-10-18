@@ -24,7 +24,7 @@
             }
         </div>
         <div class="card-footer">
-            <a href="#" class="btn btn-primary">Confirmar</a>
+            <a href="javascript:reservarPoltronas();" class="btn btn-primary">Confirmar</a>
             <a asp-controller="Viagens" asp-action="ListarViagens" class="btn btn-outline-danger">Cancelar</a>
         </div>
     </div>
@@ -41,3 +41,45 @@
             margin: 0.4em;
         }
 </style>
+
+<script>
+    function reservarPoltronas() {
+        let $botoes = $('button');
+        let $selecionados = $botoes.filter('.btn-success');
+        console.log($selecionados);
+
+        let arraySelecionados = [];
+
+        $selecionados.each(function (index, btn) {
+            let $botao = $(btn);
+            arraySelecionados.push({ id: `${$botao.attr("data-poltrona-id")}` });
+        });
+        console.log(arraySelecionados);
+
+        let arrayJSON = JSON.stringify(arraySelecionados);
+        //console.log(arrayJSON);
+
+        $.ajax({
+            type: 'POST',
+            contentType: "application/json",
+            data: arrayJSON,
+            url: "/api/poltronas/reservar",
+        })
+            .done(function (e) {
+                window.location.href = "https://localhost:44374/Reservas/ListarReservas";
+            })
+            .fail(function (error) {
+                console.warn(error);
+                alert("Falha ao confirmar reservas.");
+            });
+
+        //$.post("/api/poltronas/reservar", arraySelecionados)
+        //    .done(function (e) {
+        //        window.location.href = "https://localhost:44374/Reservas/ListarReservas";
+        //    })
+        //    .fail(function (error) {
+        //        console.warn(error);
+        //        alert("Falha ao confirmar reservas.");
+        //    });
+    }
+</script>

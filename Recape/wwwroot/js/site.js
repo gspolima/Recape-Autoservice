@@ -4,6 +4,7 @@
 // Write your JavaScript code.
 
 import Home from "./home.js";
+import Poltronas from "./poltronas.js";
 
 $(() => {
     $('a[href^="#"]').click(function (event) {
@@ -15,4 +16,7 @@ $(() => {
     });
 
     Home();
+    Poltronas();
+
+
 });

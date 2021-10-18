@@ -34,6 +34,9 @@ namespace Recape.Controllers
         [HttpPost]
         public IActionResult ReservarPoltronas([FromBody] List<PoltronaReservadaDto> selecionadas)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (selecionadas.Count != 0)
             {
                 var reservas = new List<Reserva>();
@@ -41,11 +44,14 @@ namespace Recape.Controllers
 
                 foreach (var poltrona in selecionadas)
                 {
-                    reservas.Add(new Reserva()
+                    var reserva = new Reserva()
                     {
                         PoltronaId = poltrona.Id,
-                        ClienteId = usuarioId
-                    });
+                        ClienteId = usuarioId,
+                    };
+                    poltronaRepository.IndisponibilizarPoltrona(reserva.PoltronaId);
+
+                    reservas.Add(reserva);
                 }
 
                 var criadas = reservaRepository.CriarReservas(reservas);
