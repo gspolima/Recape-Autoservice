@@ -96,7 +96,7 @@ namespace Recape.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "O email e/ou senha estão incorretos");
                     return Page();
                 }
             }
