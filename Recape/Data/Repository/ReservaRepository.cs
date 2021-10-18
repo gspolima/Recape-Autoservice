@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Recape.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Recape.Data.Repository
@@ -18,6 +19,13 @@ namespace Recape.Data.Repository
             dbContext.Add(reserva);
             var registrosCriados = dbContext.SaveChanges();
             return registrosCriados;
+        }
+
+        public int CriarReservas(List<Reserva> reservas)
+        {
+            dbContext.Reservas.AddRange(reservas);
+            var reservasCriadas = dbContext.SaveChanges();
+            return reservasCriadas;
         }
 
         public IQueryable<Reserva> GetReservas(string usuarioId)
