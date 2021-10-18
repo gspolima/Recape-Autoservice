@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Viagens disponíveis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<ListarViagensViewModel>
+
+<div id="viagens-container">
+    @foreach (var viagem in Model)
+    {
+        <div class="card">
+            <h5 class="card-header">De @viagem.Origem para @viagem.Destino por <span class="text-success">R$@viagem.Preco</span></h5>
+            <div class="card-body">
+                <h6 class="card-title">Saindo @viagem.DataSaida às @viagem.HorarioSaida</h6>
+                <p class="card-text">Com duração aproximada de @viagem.DuracaoEmHoras Horas</p>
+                <a asp-controller="Poltronas" asp-action="ListarPoltronas" asp-route-viagemId="@viagem.Id" class="btn btn-primary">Escolher poltrona</a>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    #viagens-container {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .card {
+        margin: 1em;
+    }
+</style>

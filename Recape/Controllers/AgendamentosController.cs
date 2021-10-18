@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace Recape.Controllers
 {
+    [Authorize]
     public class AgendamentosController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -29,7 +30,6 @@ namespace Recape.Controllers
             this.especialidadeRepository = especialidadeRepository;
         }
 
-        [Authorize]
         public IActionResult ListarAgendamentos()
         {
             var usuarioId = userManager.GetUserId(User);
@@ -66,7 +66,6 @@ namespace Recape.Controllers
             return View(viewModel);
         }
 
-        [Authorize]
         public ActionResult NovoAgendamento()
         {
             var viewModel = new NovoAgendamentoViewModel();
@@ -88,7 +87,7 @@ namespace Recape.Controllers
                 .ToList();
         }
 
-        [Authorize]
+
         [HttpPost]
         public ActionResult NovoAgendamento(NovoAgendamentoViewModel viewModel)
         {
@@ -110,10 +109,6 @@ namespace Recape.Controllers
                 return RedirectToAction("ListarAgendamentos");
 
             return StatusCode(500);
-
-
-
-
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace Recape.Controllers
 {
+    [Authorize]
     public class ReservasController : Controller
     {
         private readonly IReservaRepository reservaRepository;
@@ -20,7 +21,7 @@ namespace Recape.Controllers
             this.userManager = userManager;
         }
 
-        [Authorize]
+
         public IActionResult ListarReservas()
         {
             var usuarioId = userManager.GetUserId(User);

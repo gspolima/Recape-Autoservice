@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Reserva de poltrona";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ListarPoltronasViewModel
+
+<div class="col col-10">
+    <div class="card text-center">
+        <div class="card-header text-primary font-weight-bold">
+            R$ @Model.PrecoUnitario por poltrona
+        </div>
+        <div id="poltronas-container" class="card-body">
+            @foreach (var poltrona in Model.Poltronas)
+            {
+                if (poltrona.Disponivel)
+                {
+                    <button data-poltrona-id="@poltrona.Id" type="button" class="btn btn-outline-primary">@poltrona.Numero</button>
+                }
+                else
+                {
+                    <button disabled type="button" class="btn btn-danger">@poltrona.Numero</button>
+                }
+            }
+        </div>
+        <div class="card-footer">
+            <a href="#" class="btn btn-primary">Confirmar</a>
+            <a asp-controller="Viagens" asp-action="ListarViagens" class="btn btn-outline-danger">Cancelar</a>
+        </div>
+    </div>
+</div>
+<style>
+    #poltronas-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+    }
+
+        #poltronas-container .btn {
+            width: 3em;
+            margin: 0.4em;
+        }
+</style>

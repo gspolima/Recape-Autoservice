@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Recape.Models;
+using System;
 using System.Linq;
 
 namespace Recape.Data.Repository
@@ -16,6 +17,23 @@ namespace Recape.Data.Repository
         {
             this.dbContext = context;
             this.logger = logger;
+        }
+
+        public Viagem GetViagem(int viagemId)
+        {
+            var viagem = dbContext.Viagens
+                .Where(v => v.Id == viagemId)
+                .FirstOrDefault();
+
+            return viagem;
+        }
+
+        public IQueryable<Viagem> GetViagens()
+        {
+            var viagens = dbContext.Viagens
+                .Where(v => v.DataPartida > DateTime.Now);
+
+            return viagens;
         }
 
         public int InserirPoltronas()
