@@ -3,7 +3,7 @@ using Recape.Models;
 using System;
 using System.Linq;
 
-namespace Recape.Data.Repository
+namespace Recape.Data.Repository.AgendamentosConsulta
 {
     public class AgendamentoRepository : IAgendamentoRepository
     {

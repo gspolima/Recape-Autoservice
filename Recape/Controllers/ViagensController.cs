@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Recape.Data.Repository;
+using Recape.Data.Repository.Viagens;
 using Recape.ViewModels;
 using System.Collections.Generic;
 using System.Linq;

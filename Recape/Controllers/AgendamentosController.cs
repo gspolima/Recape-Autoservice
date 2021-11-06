@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Recape.Data.Repository;
+using Recape.Data.Repository.AgendamentosConsulta;
+using Recape.Data.Repository.Especialidades;
+using Recape.Data.Repository.Medicos;
 using Recape.Models;
-using Recape.Services;
+using Recape.Services.Email;
 using Recape.ViewModels;
 using System.Collections.Generic;
 using System.Linq;

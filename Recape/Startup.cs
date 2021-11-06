@@ -7,8 +7,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Recape.Data;
-using Recape.Data.Repository;
-using Recape.Services;
+using Recape.Data.Repository.AgendamentosConsulta;
+using Recape.Data.Repository.Especialidades;
+using Recape.Data.Repository.Medicos;
+using Recape.Data.Repository.Poltronas;
+using Recape.Data.Repository.Reservas;
+using Recape.Data.Repository.Viagens;
+using Recape.Services.Email;
 using System;
 
 namespace Recape

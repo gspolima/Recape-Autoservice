@@ -3,7 +3,7 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
 
-namespace Recape.Services
+namespace Recape.Services.Email
 {
     public class EmailService : IEmailService
     {
@@ -25,7 +25,7 @@ namespace Recape.Services
             var from = new EmailAddress("sampaioglima@gmail.com", "ReCarPe Autopeças");
             var subject = $"{assunto}";
             var to = new EmailAddress(emailDestino);
-            var plainTextContent = corpo;
+            var plainTextContent = "Esta mensagem deve ser visualizada em HTML";
             var htmlContent = $"<strong>{corpo}</strong>";
 
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Recape.Services
+namespace Recape.Services.Email
 {
     public interface IEmailService
     {

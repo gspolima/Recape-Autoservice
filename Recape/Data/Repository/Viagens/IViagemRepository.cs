@@ -1,7 +1,7 @@
 ﻿using Recape.Models;
 using System.Linq;
 
-namespace Recape.Data.Repository
+namespace Recape.Data.Repository.Viagens
 {
     public interface IViagemRepository
     {

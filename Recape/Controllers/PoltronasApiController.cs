@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Recape.Data.Repository;
+using Recape.Data.Repository.Poltronas;
+using Recape.Data.Repository.Reservas;
+using Recape.Data.Repository.Viagens;
 using Recape.DTOs;
 using Recape.Models;
 using System.Collections.Generic;

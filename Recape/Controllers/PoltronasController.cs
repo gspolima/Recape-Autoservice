@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Recape.Data.Repository;
+using Recape.Data.Repository.Poltronas;
+using Recape.Data.Repository.Viagens;
 using Recape.ViewModels;
 using System.Linq;
 

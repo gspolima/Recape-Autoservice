@@ -2,7 +2,7 @@
 using Recape.Models;
 using System.Linq;
 
-namespace Recape.Data.Repository
+namespace Recape.Data.Repository.Medicos
 {
     public class MedicoRepository : IMedicoRepository
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Recape.Data.Repository
+namespace Recape.Data.Repository.Reservas
 {
     public interface IReservaRepository
     {
