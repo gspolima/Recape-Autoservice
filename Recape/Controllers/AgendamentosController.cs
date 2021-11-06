@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Recape.Data.Repository;
 using Recape.Models;
+using Recape.Services;
 using Recape.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Recape.Controllers
 {
@@ -17,17 +19,20 @@ namespace Recape.Controllers
         private readonly IAgendamentoRepository agendamentoRepository;
         private readonly IEspecialidadeRepository especialidadeRepository;
         private readonly IMedicoRepository medicoRepository;
+        private readonly IEmailService emailService;
 
         public AgendamentosController(
             UserManager<IdentityUser> userManager,
             IAgendamentoRepository agendamentoRepository,
             IEspecialidadeRepository especialidadeRepository,
-            IMedicoRepository medicoRepository)
+            IMedicoRepository medicoRepository,
+            IEmailService emailService)
         {
             this.userManager = userManager;
             this.agendamentoRepository = agendamentoRepository;
             this.medicoRepository = medicoRepository;
             this.especialidadeRepository = especialidadeRepository;
+            this.emailService = emailService;
         }
 
         public IActionResult ListarAgendamentos()
@@ -89,7 +94,7 @@ namespace Recape.Controllers
 
 
         [HttpPost]
-        public ActionResult NovoAgendamento(NovoAgendamentoViewModel viewModel)
+        public async Task<ActionResult> NovoAgendamento(NovoAgendamentoViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -106,7 +111,16 @@ namespace Recape.Controllers
 
             var sucesso = agendamentoRepository.CriarAgendamento(agendamento);
             if (sucesso)
-                return RedirectToAction("ListarAgendamentos");
+            {
+                var userEmail = userManager.GetUserName(User);
+                var enviado = await emailService.EnviarEmailAsync(
+                    "sampaioglima@gmail.com",
+                    assunto: "teste sendgrid",
+                    corpo: "testando ✅");
+
+                if (enviado)
+                    return RedirectToAction("ListarAgendamentos");
+            }
 
             return StatusCode(500);
         }

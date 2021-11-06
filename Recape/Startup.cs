@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Recape.Data;
 using Recape.Data.Repository;
+using Recape.Services;
 using System;
 
 namespace Recape
@@ -40,6 +41,8 @@ namespace Recape
             });
 
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddSingleton<IEmailService, EmailService>();
 
             services.AddScoped<IPoltronaRepository, PoltronaRepository>();
             services.AddScoped<IViagemRepository, ViagemRepository>();
