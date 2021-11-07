@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Recape.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Recape.Data
 {
@@ -34,6 +35,12 @@ namespace Recape.Data
             base.OnConfiguring(optionsBuilder);
         }
 
+        public DbSet<Servico> Servicos { get; set; }
+        public DbSet<OrdemDeServico> OrdensDeServico { get; set; }
+        public DbSet<DataReservada> DatasReservadas { get; set; }
+
+        // --------------------------------------------------
+
         public DbSet<Agendamento> Agendamentos { get; set; }
         public DbSet<Medico> Medicos { get; set; }
         public DbSet<Especialidade> Especialidades { get; set; }
@@ -43,6 +50,61 @@ namespace Recape.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
+            builder.Entity<DataReservada>()
+                .Property(d => d.DataHorario)
+                .HasPrecision(1)
+                .IsRequired();
+
+            builder.Entity<Servico>()
+                .Property(s => s.Nome)
+                .HasMaxLength(30)
+                .IsRequired();
+
+            builder.Entity<Servico>()
+                .Property(s => s.Valor)
+                .HasPrecision(7, 2)
+                .IsRequired();
+
+            builder.Entity<Servico>()
+                .HasData(
+                    new List<Servico>()
+                    {
+                        new Servico()
+                        {
+                            Id = 1,
+                            Nome = "Troca de Óleo",
+                            Valor = 249.99m
+                        },
+                        new Servico()
+                        {
+                            Id = 2,
+                            Nome = "Alinhamento",
+                            Valor = 129.99m
+                        },
+                        new Servico()
+                        {
+                            Id = 3,
+                            Nome = "Funilaria",
+                            Valor = 199.99m
+                        },
+                        new Servico()
+                        {
+                            Id = 4,
+                            Nome = "Pintura",
+                            Valor = 179.99m
+                        },
+                        new Servico()
+                        {
+                            Id = 5,
+                            Nome = "Serviços de Reparo Geral",
+                            Valor = 309.99m
+                        }
+                    }
+                );
+
+            // --------------------------------------------------
+
             builder.Entity<Agendamento>()
                 .Property(p => p.DataHorario)
                 .IsRequired();
