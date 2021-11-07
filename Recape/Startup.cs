@@ -10,10 +10,13 @@ using Recape.Data;
 using Recape.Data.Repository.AgendamentosConsulta;
 using Recape.Data.Repository.Especialidades;
 using Recape.Data.Repository.Medicos;
+using Recape.Data.Repository.OrdensDeServico;
 using Recape.Data.Repository.Poltronas;
 using Recape.Data.Repository.Reservas;
+using Recape.Data.Repository.Servicos;
 using Recape.Data.Repository.Viagens;
 using Recape.Services.Email;
+using Recape.Services.OrdensDeServico;
 using System;
 
 namespace Recape
@@ -49,6 +52,9 @@ namespace Recape
 
             services.AddSingleton<IEmailService, EmailService>();
 
+            services.AddScoped<IOrdemDeServicoRepository, OrdemDeServicoRepository>();
+            services.AddScoped<IOrdemDeServicoService, OrdemDeServiceService>();
+            services.AddScoped<IServicoRepository, ServicoRepository>();
             services.AddScoped<IPoltronaRepository, PoltronaRepository>();
             services.AddScoped<IViagemRepository, ViagemRepository>();
             services.AddScoped<IMedicoRepository, MedicoRepository>();

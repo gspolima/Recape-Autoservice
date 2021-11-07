@@ -81,20 +81,6 @@ namespace Recape.Controllers
             return View(viewModel);
         }
 
-        private List<SelectListItem> CarregarListaMedicos()
-        {
-            return medicoRepository
-                .GetMedicos()
-                .Select(
-                    m => new SelectListItem()
-                    {
-                        Value = m.Id.ToString(),
-                        Text = $"{m.Nome} -- {m.Especialidade}"
-                    })
-                .ToList();
-        }
-
-
         [HttpPost]
         public async Task<ActionResult> NovoAgendamento(NovoAgendamentoViewModel viewModel)
         {
@@ -125,6 +111,19 @@ namespace Recape.Controllers
             }
 
             return StatusCode(500);
+        }
+
+        private List<SelectListItem> CarregarListaMedicos()
+        {
+            return medicoRepository
+                .GetMedicos()
+                .Select(
+                    m => new SelectListItem()
+                    {
+                        Value = m.Id.ToString(),
+                        Text = $"{m.Nome} -- {m.Especialidade}"
+                    })
+                .ToList();
         }
     }
 }
