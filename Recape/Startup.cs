@@ -33,19 +33,22 @@ namespace Recape
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var serverVersion = new MySqlServerVersion(new Version(5, 7, 32));
+            var connection = Configuration.GetConnectionString("DbConnection");
+
             services.AddDbContext<RecapeDbContext>(options =>
             {
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DbConnection"))
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-                .EnableSensitiveDataLogging()
-                .LogTo(
-                    Console.WriteLine,
-                    new[]
-                    {
-                        DbLoggerCategory.Database.Command.Name
-                    },
-                    LogLevel.Information);
+                options
+                    .UseMySql(connection, serverVersion)
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                    .EnableSensitiveDataLogging()
+                    .LogTo(
+                        Console.WriteLine,
+                        new[]
+                        {
+                            DbLoggerCategory.Database.Command.Name
+                        },
+                        LogLevel.Information);
             });
 
             services.AddDatabaseDeveloperPageExceptionFilter();

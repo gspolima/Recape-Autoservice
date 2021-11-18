@@ -27,9 +27,20 @@ namespace Recape.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
+                var serverVersion = new MySqlServerVersion(new Version(5, 7, 32));
+                var connection = configuration.GetConnectionString("DbConnection");
+
                 optionsBuilder
-                    .UseSqlServer(configuration.GetConnectionString("DbConnection"))
-                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                    .UseMySql(connection, serverVersion)
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                    .LogTo(
+                        Console.WriteLine,
+                        new[]
+                        {
+                            DbLoggerCategory.Database.Command.Name
+                        },
+                        LogLevel.Information)
+                    .EnableDetailedErrors();
             }
 
             base.OnConfiguring(optionsBuilder);

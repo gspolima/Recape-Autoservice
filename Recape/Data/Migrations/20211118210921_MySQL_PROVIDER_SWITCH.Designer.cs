@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recape.Data;
@@ -10,40 +9,38 @@ using Recape.Data;
 namespace Recape.Data.Migrations
 {
     [DbContext(typeof(RecapeDbContext))]
-    [Migration("20211011015522_EntidadesDoModuloDeViagens")]
-    partial class EntidadesDoModuloDeViagens
+    [Migration("20211118210921_MySQL_PROVIDER_SWITCH")]
+    partial class MySQL_PROVIDER_SWITCH
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.10")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64)
+                .HasAnnotation("ProductVersion", "5.0.10");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -52,18 +49,17 @@ namespace Recape.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -75,54 +71,54 @@ namespace Recape.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
@@ -131,8 +127,7 @@ namespace Recape.Data.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -141,18 +136,17 @@ namespace Recape.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -165,18 +159,18 @@ namespace Recape.Data.Migrations
                 {
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("ProviderKey")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -188,10 +182,10 @@ namespace Recape.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -203,18 +197,18 @@ namespace Recape.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -225,18 +219,17 @@ namespace Recape.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataHorario")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("MedicoId")
                         .HasColumnType("int");
 
                     b.Property<string>("PacienteId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -247,55 +240,176 @@ namespace Recape.Data.Migrations
                     b.ToTable("Agendamentos");
                 });
 
+            modelBuilder.Entity("Recape.Models.DataReservada", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataHorario")
+                        .HasPrecision(1)
+                        .HasColumnType("datetime(1)");
+
+                    b.Property<int>("OrdemDeServicoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrdemDeServicoId")
+                        .IsUnique();
+
+                    b.ToTable("DatasReservadas");
+                });
+
             modelBuilder.Entity("Recape.Models.Especialidade", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
                     b.ToTable("Especialidades");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nome = "Pediatria"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nome = "Cardiologia"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Nome = "Pneumologia"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Nome = "Clínica Geral"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Nome = "Oftalmologia"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Nome = "Ortopedia"
+                        });
                 });
 
             modelBuilder.Entity("Recape.Models.Medico", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("EspecialidadeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EspecialidadeId");
 
                     b.ToTable("Medicos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EspecialidadeId = 1,
+                            Nome = "Dra. Adama Cadaval"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EspecialidadeId = 2,
+                            Nome = "Dr. Raúl Abelho"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EspecialidadeId = 4,
+                            Nome = "Dr. Ismael Veleda"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EspecialidadeId = 2,
+                            Nome = "Dr. Alberto Mourão"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EspecialidadeId = 6,
+                            Nome = "Dr. Teófilo Saldanha"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EspecialidadeId = 7,
+                            Nome = "Dr. Rúben Medeiros"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            EspecialidadeId = 2,
+                            Nome = "Dra. Adriana Rosário"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            EspecialidadeId = 5,
+                            Nome = "Dr. Arthur Nazário"
+                        });
+                });
+
+            modelBuilder.Entity("Recape.Models.OrdemDeServico", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClienteId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("ServicoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("ServicoId");
+
+                    b.ToTable("OrdensDeServico");
                 });
 
             modelBuilder.Entity("Recape.Models.Poltrona", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<bool>("Disponivel")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<byte>("Numero")
-                        .HasColumnType("tinyint");
+                        .HasColumnType("tinyint unsigned");
 
                     b.Property<int>("ViagemId")
                         .HasColumnType("int");
@@ -311,11 +425,10 @@ namespace Recape.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("ClienteId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("PoltronaId")
                         .HasColumnType("int");
@@ -329,35 +442,124 @@ namespace Recape.Data.Migrations
                     b.ToTable("Reservas");
                 });
 
+            modelBuilder.Entity("Recape.Models.Servico", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<decimal>("Valor")
+                        .HasPrecision(7, 2)
+                        .HasColumnType("decimal(7,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Servicos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nome = "Troca de Óleo",
+                            Valor = 249.99m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nome = "Alinhamento",
+                            Valor = 129.99m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nome = "Funilaria",
+                            Valor = 199.99m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Nome = "Pintura",
+                            Valor = 179.99m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Nome = "Serviços de Reparo Geral",
+                            Valor = 309.99m
+                        });
+                });
+
             modelBuilder.Entity("Recape.Models.Viagem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataPartida")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Destino")
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasColumnType("varchar(40)");
 
                     b.Property<float>("DuracaoEmHoras")
-                        .HasColumnType("real");
+                        .HasColumnType("float");
 
                     b.Property<string>("Origem")
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasColumnType("varchar(40)");
 
                     b.Property<double>("Preco")
-                        .HasColumnType("float");
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
                     b.ToTable("Viagens");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DataPartida = new DateTime(2021, 10, 25, 16, 20, 0, 0, DateTimeKind.Unspecified),
+                            Destino = "Recife",
+                            DuracaoEmHoras = 28f,
+                            Origem = "Fortaleza",
+                            Preco = 120.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DataPartida = new DateTime(2021, 10, 23, 6, 0, 0, 0, DateTimeKind.Unspecified),
+                            Destino = "Juazeiro do Norte",
+                            DuracaoEmHoras = 20f,
+                            Origem = "Fortaleza",
+                            Preco = 90.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DataPartida = new DateTime(2021, 11, 2, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            Destino = "Belo Horizonte",
+                            DuracaoEmHoras = 24f,
+                            Origem = "Salvador",
+                            Preco = 100.0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DataPartida = new DateTime(2021, 11, 5, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            Destino = "Brasília",
+                            DuracaoEmHoras = 36f,
+                            Origem = "Porto Alegre",
+                            Preco = 180.0
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -430,6 +632,17 @@ namespace Recape.Data.Migrations
                     b.Navigation("Paciente");
                 });
 
+            modelBuilder.Entity("Recape.Models.DataReservada", b =>
+                {
+                    b.HasOne("Recape.Models.OrdemDeServico", "OrdemDeServico")
+                        .WithOne("DataAgendada")
+                        .HasForeignKey("Recape.Models.DataReservada", "OrdemDeServicoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrdemDeServico");
+                });
+
             modelBuilder.Entity("Recape.Models.Medico", b =>
                 {
                     b.HasOne("Recape.Models.Especialidade", "Especialidade")
@@ -439,6 +652,23 @@ namespace Recape.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Especialidade");
+                });
+
+            modelBuilder.Entity("Recape.Models.OrdemDeServico", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId");
+
+                    b.HasOne("Recape.Models.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("ServicoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Servico");
                 });
 
             modelBuilder.Entity("Recape.Models.Poltrona", b =>
@@ -467,6 +697,11 @@ namespace Recape.Data.Migrations
                     b.Navigation("Cliente");
 
                     b.Navigation("Poltrona");
+                });
+
+            modelBuilder.Entity("Recape.Models.OrdemDeServico", b =>
+                {
+                    b.Navigation("DataAgendada");
                 });
 
             modelBuilder.Entity("Recape.Models.Viagem", b =>
