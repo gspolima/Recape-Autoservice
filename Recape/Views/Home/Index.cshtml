@@ -2,6 +2,10 @@
     ViewData["Title"] = "Início";
 }
 
+@section Head {
+    <link rel="stylesheet" href="~/css/Index.css" />
+}
+
 <section id="introducao">
     <div id="introducao-container">
         <div id="logo">
@@ -23,7 +27,7 @@
 <section id="servicos">
     <div id="servicos-container">
         <a class="text-decoration-none" asp-controller="Agendamentos" asp-action="ListarAgendamentos">
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <img loading="lazy" src="~/img/home-atendimento.webp" class="card-img-top" alt="..." width="286" height="250">
                 <div class="card-body">
                     <h5 class="card-title">Consultas Agendadas</h5>
@@ -33,7 +37,7 @@
         </a>
 
         <a asp-controller="Reservas" asp-action="ListarReservas" class="text-decoration-none">
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <img loading="lazy" src="~/img/home-bus.webp" class="card-img-top" alt="..." width="286" height="250">
                 <div class="card-body">
                     <h5 class="card-title">Compra de Passagens</h5>
@@ -43,7 +47,7 @@
         </a>
 
         <a class="text-decoration-none" href="#contato">
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <img loading="lazy" src="~/img/home-contato.webp" class="card-img-top" width="286" height="250" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Contato</h5>
@@ -115,4 +119,6 @@
     </div>
 </section>
 
-<link rel="stylesheet" type="text/css" href="~/css/home.css" />
+@section Scripts {
+    <script type="text/javascript" src="~/js/Index.js"></script>
+}

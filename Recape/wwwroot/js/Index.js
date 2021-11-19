@@ -1,4 +1,12 @@
-﻿export default function Home() {
+﻿$(() => {
+    $('a[href^="#"]').click(function (event) {
+        event.preventDefault();
+
+        $('html, body').animate({
+            scrollTop: $($.attr(this, 'href')).offset().top
+        }, 1000);
+    });
+
     let $enviarMensagemForm = $('#contato-form');
     let $enviarMensagemAlerta = $('#mensagem-sucesso');
     $enviarMensagemAlerta.hide();
@@ -19,4 +27,4 @@
             });
         }
     });
-}
+});

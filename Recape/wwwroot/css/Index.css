@@ -52,6 +52,7 @@ section {
 }
 
 #servicos .card {
+    width: 18rem;
     border-radius: 1em;
     background-color: #214291;
     border: none;
@@ -100,4 +101,3 @@ section {
         flex-flow: row wrap;
         justify-content: space-evenly;
     }
-

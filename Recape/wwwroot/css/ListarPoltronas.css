@@ -1,0 +1,10 @@
+﻿#poltronas-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+    #poltronas-container .btn {
+        width: 3em;
+        margin: 0.4em;
+    }

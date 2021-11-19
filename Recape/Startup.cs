@@ -44,10 +44,6 @@ namespace Recape
                     .EnableSensitiveDataLogging()
                     .LogTo(
                         Console.WriteLine,
-                        new[]
-                        {
-                            DbLoggerCategory.Database.Command.Name
-                        },
                         LogLevel.Information);
             });
 

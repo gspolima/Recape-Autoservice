@@ -3,6 +3,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Head {
+    <link rel="stylesheet" href="~/css/ListarPoltronas.css" />
+}
+
 @model ListarPoltronasViewModel
 
 <div class="col col-10">
@@ -24,53 +28,12 @@
             }
         </div>
         <div class="card-footer">
-            <a href="javascript:reservarPoltronas();" class="btn btn-primary">Confirmar</a>
+            <button onclick="reservarPoltronas()" class="btn btn-primary">Confirmar</button>
             <a asp-controller="Viagens" asp-action="ListarViagens" class="btn btn-outline-danger">Cancelar</a>
         </div>
     </div>
 </div>
-<style>
-    #poltronas-container {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: flex-start;
-    }
 
-        #poltronas-container .btn {
-            width: 3em;
-            margin: 0.4em;
-        }
-</style>
-
-<script>
-    function reservarPoltronas() {
-        let $botoes = $('button');
-        let $selecionados = $botoes.filter('.btn-success');
-        console.log($selecionados);
-
-        let arraySelecionados = [];
-
-        $selecionados.each(function (index, btn) {
-            let $botao = $(btn);
-            arraySelecionados.push({ id: `${$botao.attr("data-poltrona-id")}` });
-        });
-        console.log(arraySelecionados);
-
-        let arrayJSON = JSON.stringify(arraySelecionados);
-        //console.log(arrayJSON);
-
-        $.ajax({
-            type: 'POST',
-            contentType: "application/json",
-            data: arrayJSON,
-            url: "/api/poltronas/reservar",
-        })
-            .done(function (e) {
-                window.location.href = "https://recape.azurewebsites.net/Reservas/ListarReservas";
-            })
-            .fail(function (error) {
-                console.warn(error);
-                alert("Falha ao confirmar reservas.");
-            });
-    }
-</script>
+@section Scripts {
+    <script src="~/js/ListarPoltronas.js"></script>
+}
