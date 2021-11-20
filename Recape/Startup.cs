@@ -52,7 +52,7 @@ namespace Recape
             services.AddSingleton<IEmailService, EmailService>();
 
             services.AddScoped<IOrdemDeServicoRepository, OrdemDeServicoRepository>();
-            services.AddScoped<IOrdemDeServicoService, OrdemDeServiceService>();
+            services.AddScoped<IOrdemDeServicoService, OrdemDeServicoService>();
             services.AddScoped<IServicoRepository, ServicoRepository>();
             services.AddScoped<IPoltronaRepository, PoltronaRepository>();
             services.AddScoped<IViagemRepository, ViagemRepository>();

@@ -8,6 +8,7 @@ using Recape.Data.Repository.Medicos;
 using Recape.Models;
 using Recape.Services.Email;
 using Recape.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -84,6 +85,8 @@ namespace Recape.Controllers
         [HttpPost]
         public async Task<ActionResult> NovoAgendamento(NovoAgendamentoViewModel viewModel)
         {
+            var dataHorarioFormatada = DateTime.Parse($"{viewModel.GetData()} {viewModel.GetHorario()}");
+
             if (!ModelState.IsValid)
             {
                 viewModel.MedicosEspecialidades = CarregarListaMedicos();
@@ -94,7 +97,7 @@ namespace Recape.Controllers
             {
                 PacienteId = userManager.GetUserId(User),
                 MedicoId = viewModel.MedicoId,
-                DataHorario = viewModel.GetDataHorario(),
+                DataHorario = dataHorarioFormatada
             };
 
             var sucesso = agendamentoRepository.CriarAgendamento(agendamento);

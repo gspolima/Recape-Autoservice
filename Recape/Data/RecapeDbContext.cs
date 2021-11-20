@@ -48,7 +48,7 @@ namespace Recape.Data
 
         public DbSet<Servico> Servicos { get; set; }
         public DbSet<OrdemDeServico> OrdensDeServico { get; set; }
-        public DbSet<DataReservada> DatasReservadas { get; set; }
+        public DbSet<Horario> Horarios { get; set; }
 
         // --------------------------------------------------
 
@@ -61,11 +61,70 @@ namespace Recape.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
-            builder.Entity<DataReservada>()
-                .Property(d => d.DataHorario)
-                .HasPrecision(1)
+            builder.Entity<OrdemDeServico>()
+                .Property(o => o.Data)
                 .IsRequired();
+
+            builder.Entity<Horario>()
+                .Property(d => d.HoraDoDia)
+                .IsRequired();
+
+            builder.Entity<Horario>()
+                .HasData(
+                    new List<Horario>()
+                    {
+                        new Horario()
+                        {
+                            Id = 1,
+                            HoraDoDia = new TimeOnly(8, 0)
+                        },
+                        new Horario()
+                        {
+                            Id = 2,
+                            HoraDoDia = new TimeOnly(9, 0)
+                        },
+                        new Horario()
+                        {
+                            Id = 3,
+                            HoraDoDia = new TimeOnly(10, 0)
+                        },
+                        new Horario()
+                        {
+                            Id = 4,
+                            HoraDoDia = new TimeOnly(11, 0)
+                        },
+                        new Horario()
+                        {
+                            Id = 5,
+                            HoraDoDia = new TimeOnly(12, 0)
+                        },
+                        new Horario()
+                        {
+                            Id = 6,
+                            HoraDoDia = new TimeOnly(13, 0)
+                        },
+                        new Horario()
+                        {
+                            Id = 7,
+                            HoraDoDia = new TimeOnly(14, 0)
+                        },
+                        new Horario()
+                        {
+                            Id = 8,
+                            HoraDoDia = new TimeOnly(15, 0)
+                        },
+                        new Horario()
+                        {
+                            Id = 9,
+                            HoraDoDia = new TimeOnly(16, 0)
+                        },
+                        new Horario()
+                        {
+                            Id = 10,
+                            HoraDoDia = new TimeOnly(17, 0)
+                        },
+                    }
+                );
 
             builder.Entity<Servico>()
                 .Property(s => s.Nome)
@@ -248,7 +307,7 @@ namespace Recape.Data
                         Origem = "Fortaleza",
                         Destino = "Recife",
                         Preco = 120,
-                        DataPartida = new DateTime(2021, 10, 25, 16, 20, 00),
+                        DataPartida = new DateTime(2021, 12, 25, 16, 20, 00),
                         DuracaoEmHoras = 28
                     },
                     new Viagem()
@@ -257,7 +316,7 @@ namespace Recape.Data
                         Origem = "Fortaleza",
                         Destino = "Juazeiro do Norte",
                         Preco = 90,
-                        DataPartida = new DateTime(2021, 10, 23, 06, 00, 00),
+                        DataPartida = new DateTime(2022, 10, 23, 06, 00, 00),
                         DuracaoEmHoras = 20
                     },
                     new Viagem()
@@ -266,7 +325,7 @@ namespace Recape.Data
                         Origem = "Salvador",
                         Destino = "Belo Horizonte",
                         Preco = 100,
-                        DataPartida = new DateTime(2021, 11, 02, 22, 30, 00),
+                        DataPartida = new DateTime(2022, 11, 02, 22, 30, 00),
                         DuracaoEmHoras = 24
                     },
                     new Viagem()
@@ -275,7 +334,7 @@ namespace Recape.Data
                         Origem = "Porto Alegre",
                         Destino = "Brasília",
                         Preco = 180,
-                        DataPartida = new DateTime(2021, 11, 05, 19, 00, 00),
+                        DataPartida = new DateTime(2022, 02, 15, 19, 00, 00),
                         DuracaoEmHoras = 36
                     }
                 );

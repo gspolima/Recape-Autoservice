@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace Recape.Services.OrdensDeServico
 {
-    public class OrdemDeServiceService : IOrdemDeServicoService
+    public class OrdemDeServicoService : IOrdemDeServicoService
     {
         private readonly IOrdemDeServicoRepository ordemRepository;
 
-        public OrdemDeServiceService(IOrdemDeServicoRepository ordemRepository)
+        public OrdemDeServicoService(IOrdemDeServicoRepository ordemRepository)
         {
             this.ordemRepository = ordemRepository;
         }
@@ -20,14 +20,14 @@ namespace Recape.Services.OrdensDeServico
         {
             var viewModel = ordemRepository.GetOrdensPorCliente(clienteId)
                 .Include(o => o.Servico)
-                .Include(o => o.DataAgendada)
+                .Include(o => o.Horario)
                 .Select(o => new OrdemDeServicoViewModel()
                 {
                     Id = o.Id,
                     Servico = o.Servico.Nome,
                     Valor = o.Servico.Valor,
-                    Data = o.DataAgendada.DataHorario.Date.ToString("dd/MM/yyyy"),
-                    Horario = o.DataAgendada.DataHorario.TimeOfDay.ToString("hh\\:mm")
+                    Data = o.Data.ToString("dd/MM/yyyy"),
+                    Horario = o.Horario.HoraDoDia.ToString("hh:mm")
                 })
                 .ToList();
 
@@ -39,10 +39,11 @@ namespace Recape.Services.OrdensDeServico
             var ordem = new OrdemDeServico()
             {
                 ClienteId = clienteId,
+                Data = viewModel.GetData(),
                 ServicoId = viewModel.ServicoId,
-                DataAgendada = new DataReservada()
+                Horario = new Horario()
                 {
-                    DataHorario = viewModel.GetDataHorario()
+                    HoraDoDia = viewModel.GetHorario()
                 }
             };
 

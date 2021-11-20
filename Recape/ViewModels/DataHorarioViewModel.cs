@@ -13,6 +13,8 @@ namespace Recape.ViewModels
         [Required(ErrorMessage = "Um horário deve ser selecionado")]
         public string Horario { get; set; }
 
-        public DateTime GetDataHorario() => DateTime.Parse(string.Format($"{Data} {Horario}"));
+        public DateOnly GetData() => DateOnly.ParseExact(Data, "yyyy-MM-dd");
+
+        public TimeOnly GetHorario() => TimeOnly.ParseExact(Horario, "hh:mm");
     }
 }
