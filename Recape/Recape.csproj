@@ -8,7 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\CriarOrdem.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\ListarPoltronas.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\CriarOrdem.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +33,10 @@
   <ItemGroup>
     <Folder Include="Data\Certificates\" />
     <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\CriarOrdem.js" />
   </ItemGroup>
 
 </Project>

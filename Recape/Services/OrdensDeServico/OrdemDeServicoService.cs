@@ -2,6 +2,7 @@
 using Recape.Data.Repository.OrdensDeServico;
 using Recape.Models;
 using Recape.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -41,15 +42,20 @@ namespace Recape.Services.OrdensDeServico
                 ClienteId = clienteId,
                 Data = viewModel.GetData(),
                 ServicoId = viewModel.ServicoId,
-                Horario = new Horario()
-                {
-                    HoraDoDia = viewModel.GetHorario()
-                }
+                HorarioId = viewModel.HorarioId
             };
 
             var sucesso = ordemRepository.Insert(ordem);
 
             return sucesso;
+        }
+
+        public bool verificarDisponibilidadeHorario(int servicoId, string data, int horarioId)
+        {
+            var dataFormatada = DateOnly.ParseExact(data, "yyyy-MM-dd");
+            var existe = ordemRepository.Exists(servicoId, dataFormatada, horarioId);
+
+            return existe;
         }
     }
 }

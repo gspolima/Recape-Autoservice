@@ -3,8 +3,6 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /*Navbar*/
 nav {
-    background: #E95225;
-    color: white;
     font-weight: 700;
     font-size: 1.05em;
 }
@@ -14,8 +12,8 @@ a.navbar-brand {
     text-align: center;
     word-break: break-all;
     font-family: 'Arvo', serif;
-    font-weight: 700;
-    font-size: 1.1em;
+    font-weight: 400;
+    font-size: 1.6em;
 }
 
 /* Provide sufficient contrast against white background */
@@ -73,10 +71,10 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 }
 .footer {
-    background: #db5137;
+    /*background: #db5137;*/
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -85,10 +83,6 @@ body {
 }
 
 /*Bootstrap Overrides*/
-
-.btn-primary {
-    background-color: #db5137;
-}
 
 .dropdown-item:focus, .dropdown-item:hover {
     background-color: #e3e3e3;

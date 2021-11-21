@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Recape.Data;
 using Recape.Data.Repository.AgendamentosConsulta;
 using Recape.Data.Repository.Especialidades;
+using Recape.Data.Repository.Horarios;
 using Recape.Data.Repository.Medicos;
 using Recape.Data.Repository.OrdensDeServico;
 using Recape.Data.Repository.Poltronas;
@@ -51,14 +52,23 @@ namespace Recape
 
             services.AddSingleton<IEmailService, EmailService>();
 
+            services.AddScoped<IHorarioRepository, HorarioRepository>();
+
             services.AddScoped<IOrdemDeServicoRepository, OrdemDeServicoRepository>();
             services.AddScoped<IOrdemDeServicoService, OrdemDeServicoService>();
+
             services.AddScoped<IServicoRepository, ServicoRepository>();
+
             services.AddScoped<IPoltronaRepository, PoltronaRepository>();
+
             services.AddScoped<IViagemRepository, ViagemRepository>();
+
             services.AddScoped<IMedicoRepository, MedicoRepository>();
+
             services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
+
             services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
+
             services.AddScoped<IReservaRepository, ReservaRepository>();
 
             services.AddDefaultIdentity<IdentityUser>(options =>
@@ -68,8 +78,8 @@ namespace Recape
             services.Configure<IdentityOptions>(options =>
                 {
                     options.Password.RequiredLength = 8;
-                    options.Password.RequireDigit = true;
-                    options.User.RequireUniqueEmail = true;
+                    options.Password.RequireDigit = false;
+                    options.User.RequireUniqueEmail = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;

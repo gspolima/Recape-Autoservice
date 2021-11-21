@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Recape.Data.Repository.Horarios;
 using Recape.Data.Repository.Servicos;
 using Recape.Services.OrdensDeServico;
 using Recape.ViewModels;
@@ -14,15 +15,18 @@ namespace Recape.Controllers
     {
         private readonly IServicoRepository servicoRepository;
         private readonly IOrdemDeServicoService ordemService;
+        private readonly IHorarioRepository horarioRepository;
         private readonly UserManager<IdentityUser> userManager;
 
         public OrdensDeServicoController(
             IServicoRepository servicoRepository,
             IOrdemDeServicoService ordemService,
+            IHorarioRepository horarioRepository,
             UserManager<IdentityUser> userManager)
         {
             this.servicoRepository = servicoRepository;
             this.ordemService = ordemService;
+            this.horarioRepository = horarioRepository;
             this.userManager = userManager;
         }
 
@@ -38,8 +42,7 @@ namespace Recape.Controllers
         public IActionResult CriarOrdem()
         {
             var viewModel = new NovaOrdemDeServicoViewModel();
-
-            viewModel.Servicos = PopularListaServicos();
+            PopularListas(viewModel);
 
             return View(viewModel);
         }
@@ -49,7 +52,25 @@ namespace Recape.Controllers
         {
             if (!ModelState.IsValid)
             {
-                viewModel.Servicos = PopularListaServicos();
+                PopularListas(viewModel);
+                return View("CriarOrdem", viewModel);
+            }
+
+            var existeConflito = ordemService.verificarDisponibilidadeHorario(
+                viewModel.ServicoId,
+                viewModel.Data,
+                viewModel.HorarioId);
+
+            if (existeConflito)
+            {
+                ModelState.AddModelError(
+                    "ExisteConflito",
+                    "Horário já reservado para o serviço e data selecionados. Escolha outro horário.");
+            }
+
+            if (!TryValidateModel(ModelState))
+            {
+                PopularListas(viewModel);
                 return View("CriarOrdem", viewModel);
             }
 
@@ -64,6 +85,11 @@ namespace Recape.Controllers
 
         }
 
+
+
+
+
+
         private SelectList PopularListaServicos()
         {
             var servicos = servicoRepository.GetServicos()
@@ -76,6 +102,25 @@ namespace Recape.Controllers
                 .ToList();
 
             return new SelectList(servicos, "Id", "Nome");
+        }
+
+        private SelectList PopularListaHorarios()
+        {
+            var horarios = horarioRepository.GetHorarios()
+                .Select(h => new
+                {
+                    h.Id,
+                    h.HoraDoDia
+                })
+                .ToList();
+
+            return new SelectList(horarios, "Id", "HoraDoDia");
+        }
+
+        private void PopularListas(NovaOrdemDeServicoViewModel viewModel)
+        {
+            viewModel.Servicos = PopularListaServicos();
+            viewModel.Horarios = PopularListaHorarios();
         }
     }
 }

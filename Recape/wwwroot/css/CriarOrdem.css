@@ -1,0 +1,8 @@
+﻿div.col-3:hover {
+    background-color: lightgray;
+    border-radius: 0.5em;
+}
+
+label {
+    font-weight: bold;
+}

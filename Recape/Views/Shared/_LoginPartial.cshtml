@@ -7,10 +7,10 @@
     {
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                @UserManager.GetUserName(User)
+                <i class='fas fa-user'></i>&nbsp; @UserManager.GetUserName(User)
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item text-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Identity/Account/Login")">Sair</a>
+                <a class="dropdown-item text-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Identity/Account/Login")"><i class='fas fa-sign-out-alt'></i>&nbsp; Sair</a>
             </div>
         </li>
 

@@ -4,49 +4,57 @@
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 
-<h1>Nova Ordem de Serviço</h1>
+@section Head {
+    <link rel="stylesheet" href="~/css/CriarOrdem.css" />
+}
+
+<h2><i class='fas fa-file-contract'></i>&nbsp;&nbsp;Nova OS</h2>
 <hr />
 
-<div class="col-sm-5">
+<div class="col-sm-4">
     <form asp-controller="OrdensDeServico" asp-action="CriarOrdem" method="post">
+
         <div class="form-group">
-            <label asp-for="ServicoId">Serviço<span class="text-danger">*</span></label>
-            <select class="form-control"
+            <i class='fas fa-tools'></i>&nbsp;
+            <label asp-for="ServicoId">Serviço<span class="text-danger">&nbsp;*</span></label>
+            <select id="listaServicos" class="form-control"
                     asp-for="ServicoId"
                     asp-items="Model.Servicos">
                 <option value="">-- Selecione um serviço --</option>
             </select>
             <span asp-validation-for="@Model.ServicoId" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="Data">Data<span class="text-danger">*</span></label>
+            <i class='fas fa-calendar-alt'></i>&nbsp;
+            <label asp-for="Data">Data<span class="text-danger">&nbsp;*</span></label>
             <input type="date" asp-for="Data" class="form-control" />
             <span asp-validation-for="@Model.Data" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label>Horário<span class="text-danger">*</span></label>
-            <div class="d-flex flex-row flex-wrap">
-                @for (int i = 8; i <= 18; i++)
-                {
-                    <div class="col-3">
-                        <input type="radio" id="@i-opcao" name="horario" value="@i:00:00" asp-for="Horario" class="form-control-sm" />
-                        <label for="@i-opcao" class="align-bottom">@i:00</label>
-                    </div>
-                }
-            </div>
-            <span asp-validation-for="@Model.Horario" class="text-danger"></span>
+            <i class='fas fa-clock'></i>&nbsp;
+            <label asp-for="HorarioId">Horário<span class="text-danger">&nbsp;*</span></label>
+            <select class="form-control"
+                    asp-for="HorarioId"
+                    asp-items="Model.Horarios">
+                <option value="">-- Selecione um horário --</option>
+            </select>
+            <span asp-validation-for="@Model.HorarioId" class="text-danger"></span>
         </div>
-        <input type="submit" class="btn btn-primary" value="Criar" />
+
+        <div class="form-group">
+            <h3><span id="valor" class="badge badge-pill badge-dark"></span></h3>
+        </div>
+
+        <div class="form-group">
+            <span asp-validation-for="@Model.ExisteConflito" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary"><i class='fas fa-plus'></i>&nbsp;&nbsp;Criar OS</button>
     </form>
 </div>
 
-<style>
-    div.col-3:hover {
-        background-color: lightgray;
-        border-radius: 0.5em;
-    }
-
-    label {
-        font-weight: bold;
-    }
-</style>
+@section Scripts {
+    <script type="text/javascript" src="~/js/CriarOrdem.js"></script>
+}

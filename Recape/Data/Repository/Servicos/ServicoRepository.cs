@@ -18,5 +18,15 @@ namespace Recape.Data.Repository.Servicos
 
             return servicos;
         }
+
+        public decimal GetValorPorServicoId(int id)
+        {
+            var valor = dbContext.Servicos
+                .Where(s => s.Id == id)
+                .Select(s => new { Valor = s.Valor })
+                .FirstOrDefault();
+
+            return valor.Valor;
+        }
     }
 }

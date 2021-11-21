@@ -5,35 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Ordens de Serviço</h1>
+<h2><i class='fas fa-list'></i>&nbsp;Ordens de Serviço</h2>
 <hr />
-<a id="novaOrdemDeServico" asp-controller="OrdensDeServico" asp-action="CriarOrdem" class="btn btn-success">Nova Ordem de Serviço</a>
+<a id="novaOrdemDeServico" asp-controller="OrdensDeServico" asp-action="CriarOrdem" class="btn btn-outline-success"><i class="fas fa-plus-circle"></i>&nbsp; Nova OS</a>
 
 @if (Model.Count != 0)
 {
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Serviço</th>
-                <th scope="col">Valor</th>
-                <th scope="col">Data</th>
-                <th scope="col">Horário</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var ordem in Model)
-            {
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-light">
                 <tr>
-                    <th scope="row">@ordem.Id</th>
-                    <td>@ordem.Servico</td>
-                    <td>R$ @ordem.Valor</td>
-                    <td>@ordem.Data</td>
-                    <td>@ordem.Horario</td>
+                    <th scope="col"><i class='fas fa-hashtag'></i>&nbsp;ID</th>
+                    <th scope="col"><i class='fas fa-tools'></i>&nbsp;Serviço</th>
+                    <th scope="col"><i class='fas fa-dollar-sign'></i>&nbsp;Valor</th>
+                    <th scope="col"><i class='fas fa-calendar-alt'></i>&nbsp;Marcado para</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var ordem in Model)
+                {
+                    <tr>
+                        <th scope="row">@ordem.Id</th>
+                        <td>@ordem.Servico</td>
+                        <td>R$ @ordem.Valor</td>
+                        <td>@ordem.Data às @ordem.Horario</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {
