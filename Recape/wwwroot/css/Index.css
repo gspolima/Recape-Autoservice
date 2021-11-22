@@ -1,12 +1,12 @@
 ﻿body {
-    color: white;
-    background-image: url(../img/home-servicos-fundo.jpg);
-    background-attachment: fixed;
+    /*background-image: url(../img/oficina-fundo.webp);
+    background-attachment: fixed;*/
+    background-color: #3b4752;
 }
 
 /*HOME PAGE*/
 section {
-    border-radius: 2em;
+
 }
 
     section#fundadores {
@@ -15,85 +15,73 @@ section {
     }
 
     section#contato {
+        background-color: transparent;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
 
 #introducao {
-    background-color: #3D518C;
-    padding: 100px 0;
+    padding: 0px 0;
 }
 
     #introducao #introducao-container {
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column wrap;
         justify-content: space-around;
         align-items: center;
     }
 
         #introducao #introducao-container #descricao {
-            max-width: 30em;
+            max-width: 100%!important;
         }
 
-        #introducao #introducao-container #acoes a {
-            font-size: 1.1em;
-        }
 
 #servicos {
-    padding: 140px 0;
+    padding: 30px 0;
+    /*background-color: #f7f7f7;*/
 }
 
-#servicos-container {
-    margin-right: 0;
-    margin-left: 0;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-}
+    #servicos-container {
+        padding: 20px 0;
+        margin-right: 0;
+        margin-left: 0;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+    }
 
 #servicos .card {
-    width: 18rem;
-    border-radius: 1em;
-    background-color: #214291;
-    border: none;
+    margin: 1em;
 }
 
 #servicos .card-img-top {
-    border-top-left-radius: 1em;
-    border-top-right-radius: 1em
+    border-radius: 3.2em;
 }
 
-#servicos a {
-    color: white;
-}
-
-    #servicos a:hover {
-        color: #c7c4c3;
-    }
 
 #fundadores {
-    background-color: #3D518C;
-    padding: 100px 0;
+    padding: 40px 0 10px 0;
+    /*background-color: #f7f7f7;*/
 }
 
     #fundadores #fundadores-container {
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-around;
+        justify-content: space-evenly;
     }
 
-#fundadores-container .card {
-    border: none;
-    background-color: transparent;
-}
+    #fundadores-container .card {
+        border: none;
+        background-color: transparent;
+    }
 
-#fundadores-container .card-img {
-    border-radius: 3.2em;
-}
+    #fundadores-container .card-img {
+        border-radius: 3.2em;
+    }
 
 #contato {
-    background-color: #3D518C;
-    padding: 100px 0;
+    /*background-color: #3D518C;*/
+    padding: 40px 0;
 }
 
     #contato #contato-container {
@@ -101,3 +89,10 @@ section {
         flex-flow: row wrap;
         justify-content: space-evenly;
     }
+
+.carousel-caption {
+    background-color: black;
+    opacity: 0.7;
+    right: 0;
+    left: 0;
+}

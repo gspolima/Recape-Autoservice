@@ -8,66 +8,100 @@
 
 <section id="introducao">
     <div id="introducao-container">
-        <div id="logo">
-            <img loading="lazy" src="~/img/home-logo.webp" width="350" height="350" style="border-radius: 18em" />
-        </div>
-        <div id="apresentacao">
-            <div id="descricao">
-                <h1>Somos a Recape!</h1>
-                <p>Oferecemos serviços em agendamento de consultas médicas e viagens rodoviárias</p>
-            </div>
-            <div id="acoes">
-                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary">Cadastre-se</a>
-                <a href="#servicos" class="btn btn-primary">Conheça nossos serviços</a>
+        <div id="descricao">
+            <div id="carrosselComLegendas" class="carousel slide carousel-fade" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carrosselComLegendas" data-slide-to="0" class="active"></li>
+                    <li data-target="#carrosselComLegendas" data-slide-to="1"></li>
+                </ol>
+                <div style="border-radius: 3.2em;" class="carousel-inner">
+                    <div class="carousel-item active" data-interval="5000">
+                        <img src="~/img/carro.webp" class="d-block w-100" alt="Carros">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>Carros</h3>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-interval="5000">
+                        <img src="~/img/moto.webp" class="d-block w-100" alt="Motos">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>Motocicletas</h3>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carrosselComLegendas" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#carrosselComLegendas" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Próximo</span>
+                </a>
             </div>
         </div>
     </div>
+    <hr />
 </section>
 
-<section id="servicos">
+<section class="text-center" id="servicos">
+    <h1 class="text-light">Serviços</h1>
     <div id="servicos-container">
-        <a class="text-decoration-none" asp-controller="Agendamentos" asp-action="ListarAgendamentos">
-            <div class="card">
-                <img loading="lazy" src="~/img/home-atendimento.webp" class="card-img-top" alt="..." width="286" height="250">
-                <div class="card-body">
-                    <h5 class="card-title">Consultas Agendadas</h5>
-                    <p class="card-text">Marque um horário com um de nossos profissionais</p>
-                </div>
+        <div class="card border-0 bg-transparent text-light">
+            <img loading="lazy" src="~/img/troca-oleo.webp" class="card-img-top" alt="..." width="250" height="250">
+            <div class="card-body">
+                <h4 class="card-title">Troca de Óleo</h4>
             </div>
-        </a>
+        </div>
 
-        <a asp-controller="Reservas" asp-action="ListarReservas" class="text-decoration-none">
-            <div class="card">
-                <img loading="lazy" src="~/img/home-bus.webp" class="card-img-top" alt="..." width="286" height="250">
-                <div class="card-body">
-                    <h5 class="card-title">Compra de Passagens</h5>
-                    <p class="card-text">Reserve assentos numa frota de veículos pensada para o seu comforto</p>
-                </div>
+        <div class="card border-0 bg-transparent text-light">
+            <img loading="lazy" src="~/img/alinhamento.webp" class="card-img-top" alt="..." width="250" height="250">
+            <div class="card-body">
+                <h4 class="card-title">Alinhamento</h4>
             </div>
-        </a>
+        </div>
 
-        <a class="text-decoration-none" href="#contato">
-            <div class="card">
-                <img loading="lazy" src="~/img/home-contato.webp" class="card-img-top" width="286" height="250" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Contato</h5>
-                    <p class="card-text">Saiba como nos contactar</p>
-                </div>
+        <div class="card border-0 bg-transparent text-light">
+            <img loading="lazy" src="~/img/pintura.webp" class="card-img-top" alt="..." width="250" height="250">
+            <div class="card-body">
+                <h4 class="card-title">Pintura</h4>
             </div>
-        </a>
+        </div>
+
+        <div class="card border-0 bg-transparent text-light">
+            <img loading="lazy" src="~/img/funilaria.webp" class="card-img-top" alt="..." width="250" height="250">
+            <div class="card-body">
+                <h4 class="card-title">Funilaria</h4>
+            </div>
+        </div>
+
+        <div class="card border-0 bg-transparent text-light">
+            <img loading="lazy" src="~/img/servicos-gerais.webp" class="card-img-top" alt="..." width="250" height="250">
+            <div class="card-body">
+                <h4 class="card-title">Serviço Geral</h4>
+            </div>
+        </div>
     </div>
+    <hr />
 </section>
 
+<section id="comentarios">
+    <h1 class="text-center text-light">O que os nossos clientes estão dizendo</h1>
+    <div id="comentarios-container">
+
+    </div>
+    <hr />
+</section> 
+
+<h1 class="text-center text-light">Contato</h1>
 <section id="fundadores">
-    <div id="fundadores-container" class="text-center">
+    <div id="fundadores-container" class="align-middle text-left text-light">
         <div class="card mb-3" style="max-width: 20em;">
             <div class="row no-gutters">
                 <div class="col-md-4">
                     <img loading="lazy" src="~/img/home-gustavo.webp" class="card-img" alt="...">
                 </div>
                 <div class="col-md-8">
-                    <div class="card-body align-middle">
-                        <h5 class="card-text">Gustavo Sampaio</h5>
+                    <div class="card-body">
+                        <h5 class="card-text">Gustavo</h5>
                     </div>
                 </div>
             </div>
@@ -78,8 +112,8 @@
                     <img loading="lazy" src="~/img/home-juan.webp" class="card-img" alt="...">
                 </div>
                 <div class="col-md-8">
-                    <div class="card-body align-middle">
-                        <h5 class="card-text">Juan Miguel</h5>
+                    <div class="card-body">
+                        <h5 class="card-text">Juan</h5>
                     </div>
                 </div>
             </div>
@@ -89,26 +123,26 @@
 
 <section id="contato">
     <div id="contato-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.252295495474!2d-38.490122939709046!3d-3.755160181365639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74963201865ff%3A0x2d77cda38272811f!2sShopping%20Iguatemi%20Fortaleza!5e0!3m2!1sen!2sbr!4v1633723625697!5m2!1sen!2sbr" width="600" height="500" style="border:0; border-radius: 2em;" allowfullscreen="" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.252295495474!2d-38.490122939709046!3d-3.755160181365639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74963201865ff%3A0x2d77cda38272811f!2sShopping%20Iguatemi%20Fortaleza!5e0!3m2!1sen!2sbr!4v1633723625697!5m2!1sen!2sbr" width="600" height="515" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-        <div>
-            <h2>Contate-nos</h2>
+        <div class="text-light">
+            <h2>Envie-nos um email</h2>
             <form id="contato-form">
                 <div class="form-group">
                     <label for="nome">Seu Nome</label>
-                    <input type="text" class="form-control form-control" id="nome" required>
+                    <input type="text" class="form-control" id="nome" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Seu Email</label>
-                    <input type="email" class="form-control form-control" id="email" aria-describedby="emailHelp" required>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
                 </div>
                 <div class="form-group">
                     <label for="assunto">Assunto</label>
-                    <input type="text" class="form-control form-control" id="assunto" required>
+                    <input type="text" class="form-control" id="assunto" required>
                 </div>
                 <div class="form-group">
                     <label for="mensagem">Mensagem</label>
-                    <textarea class="form-control form-control" id="mensagem" rows="4" required></textarea>
+                    <textarea class="form-control" id="mensagem" rows="4" required></textarea>
                 </div>
                 <button id="mensagem-enviar" type="submit" class="btn btn-primary">Enviar</button>
                 <span id="mensagem-sucesso" class="float-right alert alert-success small font-weight-bold" role="alert">

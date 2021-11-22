@@ -17,7 +17,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark box-shadow mb-4">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    RECAPE
+                    <img src="~/img/logo.png" width="250" height="29"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,7 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="OrdensDeServico" asp-action="ListarOrdens">Ordens de Serviço</a>
+                            <a class="nav-link text-light text-nowrap" asp-area="" asp-controller="OrdensDeServico" asp-action="ListarOrdens">Ordens de Serviço</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -38,16 +38,10 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-2">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="footer text-light bg-dark">
-        <div class="container">
-            &copy; 2021 Recape - Todos os direitos reservados
-        </div>
-    </footer>
     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
