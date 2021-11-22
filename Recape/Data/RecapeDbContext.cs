@@ -49,6 +49,7 @@ namespace Recape.Data
         public DbSet<Servico> Servicos { get; set; }
         public DbSet<OrdemDeServico> OrdensDeServico { get; set; }
         public DbSet<Horario> Horarios { get; set; }
+        public DbSet<Comentario> Comentarios { get; set; }
 
         // --------------------------------------------------
 
@@ -61,8 +62,23 @@ namespace Recape.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Comentario>()
+                .Property(c => c.Texto)
+                .HasMaxLength(200)
+                .IsRequired();
+
             builder.Entity<OrdemDeServico>()
                 .Property(o => o.Data)
+                .IsRequired();
+
+            builder.Entity<OrdemDeServico>()
+                .Property(o => o.Finalizado)
+                .HasDefaultValue(false)
+                .IsRequired();
+
+            builder.Entity<OrdemDeServico>()
+                .Property(o => o.Cancelado)
+                .HasDefaultValue(false)
                 .IsRequired();
 
             builder.Entity<Horario>()

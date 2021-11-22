@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recape.Data;
 
@@ -10,9 +11,10 @@ using Recape.Data;
 namespace Recape.Data.Migrations
 {
     [DbContext(typeof(RecapeDbContext))]
-    partial class RecapeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211122030915_Comentarios_e_OS_Status")]
+    partial class Comentarios_e_OS_Status
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,7 +239,7 @@ namespace Recape.Data.Migrations
 
                     b.HasIndex("PacienteId");
 
-                    b.ToTable("Agendamentos", (string)null);
+                    b.ToTable("Agendamentos");
                 });
 
             modelBuilder.Entity("Recape.Models.Comentario", b =>
@@ -258,7 +260,7 @@ namespace Recape.Data.Migrations
 
                     b.HasIndex("OrdemDeServicoId");
 
-                    b.ToTable("Comentarios", (string)null);
+                    b.ToTable("Comentarios");
                 });
 
             modelBuilder.Entity("Recape.Models.Especialidade", b =>
@@ -273,7 +275,7 @@ namespace Recape.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Especialidades", (string)null);
+                    b.ToTable("Especialidades");
 
                     b.HasData(
                         new
@@ -319,7 +321,7 @@ namespace Recape.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Horarios", (string)null);
+                    b.ToTable("Horarios");
 
                     b.HasData(
                         new
@@ -391,7 +393,7 @@ namespace Recape.Data.Migrations
 
                     b.HasIndex("EspecialidadeId");
 
-                    b.ToTable("Medicos", (string)null);
+                    b.ToTable("Medicos");
 
                     b.HasData(
                         new
@@ -483,7 +485,7 @@ namespace Recape.Data.Migrations
 
                     b.HasIndex("ServicoId");
 
-                    b.ToTable("OrdensDeServico", (string)null);
+                    b.ToTable("OrdensDeServico");
                 });
 
             modelBuilder.Entity("Recape.Models.Poltrona", b =>
@@ -505,7 +507,7 @@ namespace Recape.Data.Migrations
 
                     b.HasIndex("ViagemId");
 
-                    b.ToTable("Poltronas", (string)null);
+                    b.ToTable("Poltronas");
                 });
 
             modelBuilder.Entity("Recape.Models.Reserva", b =>
@@ -526,7 +528,7 @@ namespace Recape.Data.Migrations
 
                     b.HasIndex("PoltronaId");
 
-                    b.ToTable("Reservas", (string)null);
+                    b.ToTable("Reservas");
                 });
 
             modelBuilder.Entity("Recape.Models.Servico", b =>
@@ -546,7 +548,7 @@ namespace Recape.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Servicos", (string)null);
+                    b.ToTable("Servicos");
 
                     b.HasData(
                         new
@@ -608,7 +610,7 @@ namespace Recape.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Viagens", (string)null);
+                    b.ToTable("Viagens");
 
                     b.HasData(
                         new
