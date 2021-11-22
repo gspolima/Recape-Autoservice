@@ -19,7 +19,7 @@ function enviarRequest(valor) {
         url: `api/valorServico/${valor}`
     })
         .done(function (data) {
-            $valorServico.text(`R$ ${data}`);
+            $valorServico.val(data);
         })
         .fail(function (error) {
             console.error(error);

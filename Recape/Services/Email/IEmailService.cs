@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using Recape.Models;
+using System.Threading.Tasks;
 
 namespace Recape.Services.Email
 {
     public interface IEmailService
     {
-        Task<bool> EnviarEmailAsync(string emailDestino, string assunto, string corpo);
+        Task<bool> EnviarEmailAsync(EmailAutomatico email);
+        string FormatarCorpoEmail(int id, string cliente, string dataHorario, string total, string servico);
     }
 }

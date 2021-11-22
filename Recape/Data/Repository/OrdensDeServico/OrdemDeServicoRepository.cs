@@ -1,4 +1,5 @@
-﻿using Recape.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Recape.Models;
 using System;
 using System.Linq;
 
@@ -13,7 +14,18 @@ namespace Recape.Data.Repository.OrdensDeServico
             this.dbContext = dbContext;
         }
 
-        public bool Exists(int servicoId, System.DateOnly data, int horarioId)
+        public IQueryable<OrdemDeServico> GetOrdemPorCliente(string clienteId)
+        {
+            var ordem = dbContext.OrdensDeServico
+                .Where(o => o.ClienteId == clienteId)
+                .Include(o => o.Cliente)
+                .Include(o => o.Horario)
+                .Include(o => o.Servico);
+
+            return ordem;
+        }
+
+        public bool Exists(int servicoId, DateOnly data, int horarioId)
         {
             var existe = dbContext.OrdensDeServico
                 .Where(

@@ -102,16 +102,7 @@ namespace Recape.Controllers
 
             var sucesso = agendamentoRepository.CriarAgendamento(agendamento);
             if (sucesso)
-            {
-                var userEmail = userManager.GetUserName(User);
-                var enviado = await emailService.EnviarEmailAsync(
-                    "sampaioglima@gmail.com",
-                    assunto: "teste sendgrid",
-                    corpo: "testando ✅");
-
-                if (enviado)
-                    return RedirectToAction("ListarAgendamentos");
-            }
+                return RedirectToAction("ListarAgendamentos");
 
             return StatusCode(500);
         }

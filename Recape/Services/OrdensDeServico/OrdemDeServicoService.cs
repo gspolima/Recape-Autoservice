@@ -17,6 +17,23 @@ namespace Recape.Services.OrdensDeServico
             this.ordemRepository = ordemRepository;
         }
 
+        public ConfirmacaoEmailViewModel GetDadosOrdemDeServicoParaEmail(string clienteId)
+        {
+            var dados = ordemRepository.GetOrdemPorCliente(clienteId)
+                .Select(o => new ConfirmacaoEmailViewModel
+                {
+                    Id = o.Id,
+                    Cliente = o.Cliente.UserName,
+                    DataHorario = string.Format(o.Data.ToString("dd/MM/yyyy") + " " + o.Horario.HoraDoDia.ToString("HH:mm")),
+                    Total = o.Total,
+                    Servico = o.Servico.Nome
+                })
+                .OrderByDescending(c => c.Id)
+                .FirstOrDefault();
+
+            return dados;
+        }
+
         public List<OrdemDeServicoViewModel> GetOrdensDeServico(string clienteId)
         {
             var viewModel = ordemRepository.GetOrdensPorCliente(clienteId)
@@ -42,7 +59,8 @@ namespace Recape.Services.OrdensDeServico
                 ClienteId = clienteId,
                 Data = viewModel.GetData(),
                 ServicoId = viewModel.ServicoId,
-                HorarioId = viewModel.HorarioId
+                HorarioId = viewModel.HorarioId,
+                Total = viewModel.Valor
             };
 
             var sucesso = ordemRepository.Insert(ordem);

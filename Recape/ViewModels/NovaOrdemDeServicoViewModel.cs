@@ -16,5 +16,7 @@ namespace Recape.ViewModels
         public int HorarioId { get; set; }
 
         public bool ExisteConflito { get; set; }
+
+        public string Valor { get; set; }
     }
 }

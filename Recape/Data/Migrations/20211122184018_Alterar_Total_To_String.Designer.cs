@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recape.Data;
 
@@ -10,9 +11,10 @@ using Recape.Data;
 namespace Recape.Data.Migrations
 {
     [DbContext(typeof(RecapeDbContext))]
-    partial class RecapeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211122184018_Alterar_Total_To_String")]
+    partial class Alterar_Total_To_String
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

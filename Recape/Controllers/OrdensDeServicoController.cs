@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Recape.Data.Repository.Horarios;
 using Recape.Data.Repository.Servicos;
+using Recape.Models;
+using Recape.Services.Email;
 using Recape.Services.OrdensDeServico;
 using Recape.ViewModels;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Recape.Controllers
 {
@@ -16,17 +19,20 @@ namespace Recape.Controllers
         private readonly IServicoRepository servicoRepository;
         private readonly IOrdemDeServicoService ordemService;
         private readonly IHorarioRepository horarioRepository;
+        private readonly IEmailService emailService;
         private readonly UserManager<IdentityUser> userManager;
 
         public OrdensDeServicoController(
             IServicoRepository servicoRepository,
             IOrdemDeServicoService ordemService,
             IHorarioRepository horarioRepository,
+            IEmailService emailService,
             UserManager<IdentityUser> userManager)
         {
             this.servicoRepository = servicoRepository;
             this.ordemService = ordemService;
             this.horarioRepository = horarioRepository;
+            this.emailService = emailService;
             this.userManager = userManager;
         }
 
@@ -48,7 +54,7 @@ namespace Recape.Controllers
         }
 
         [HttpPost]
-        public IActionResult CriarOrdem(NovaOrdemDeServicoViewModel viewModel)
+        public async Task<ActionResult> CriarOrdem(NovaOrdemDeServicoViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -79,15 +85,27 @@ namespace Recape.Controllers
             var sucesso = ordemService.InserirOrdem(usuarioLogado, viewModel);
 
             if (sucesso)
-                return RedirectToAction("ListarOrdens");
+            {
+                var dadosEmail = ordemService.GetDadosOrdemDeServicoParaEmail(usuarioLogado);
+                var corpoEmail = emailService.FormatarCorpoEmail(dadosEmail.Id, dadosEmail.Cliente, dadosEmail.DataHorario, dadosEmail.Total, dadosEmail.Servico);
+
+                var emailConfirmacao = new EmailAutomatico()
+                {
+                    Destinatario = userManager.GetUserName(User),
+                    Assunto = $"Confirmação da Ordem de Serviço #{dadosEmail.Id}",
+                    Corpo = corpoEmail
+                };
+
+                var enviado = await emailService.EnviarEmailAsync(emailConfirmacao);
+
+                if (enviado)
+                    return RedirectToAction("ListarOrdens");
+
+                return StatusCode(500);
+            }
 
             return StatusCode(500);
-
         }
-
-
-
-
 
 
         private SelectList PopularListaServicos()
