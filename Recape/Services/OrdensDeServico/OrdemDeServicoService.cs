@@ -17,6 +17,22 @@ namespace Recape.Services.OrdensDeServico
             this.ordemRepository = ordemRepository;
         }
 
+        public OrdemDeServicoViewModel GetOrdemDeServicoPorId(int id)
+        {
+            var ordem = ordemRepository.GetOrdemPorId(id)
+                .Select(o => new OrdemDeServicoViewModel()
+                {
+                    Id = o.Id,
+                    Servico = o.Servico.Nome,
+                    Valor = Convert.ToDecimal(o.Total),
+                    Data = o.Data.ToString("dd/MM/yyyy"),
+                    Horario = o.Horario.HoraDoDia.ToString("HH:mm")
+                })
+                .FirstOrDefault();
+
+            return ordem;
+        }
+
         public ConfirmacaoEmailViewModel GetDadosOrdemDeServicoParaEmail(string clienteId)
         {
             var dados = ordemRepository.GetOrdemPorCliente(clienteId)
@@ -45,8 +61,13 @@ namespace Recape.Services.OrdensDeServico
                     Servico = o.Servico.Nome,
                     Valor = o.Servico.Valor,
                     Data = o.Data.ToString("dd/MM/yyyy"),
-                    Horario = o.Horario.HoraDoDia.ToString("hh:mm")
+                    Horario = o.Horario.HoraDoDia.ToString("HH:mm"),
+                    Concluido = o.Finalizado,
+                    Cancelado = o.Cancelado,
+                    Avaliado = o.Avaliado
                 })
+                .AsEnumerable()
+                .OrderBy(o => DateOnly.Parse(o.Data))
                 .ToList();
 
             return viewModel;
@@ -74,6 +95,50 @@ namespace Recape.Services.OrdensDeServico
             var existe = ordemRepository.Exists(servicoId, dataFormatada, horarioId);
 
             return existe;
+        }
+
+        public bool AtualizarOSAvaliada(int id, bool avaliado)
+        {
+            var ordem = ordemRepository.GetOrdemPorId(id)
+                .Select(o => new OrdemDeServico()
+                {
+                    Id = o.Id,
+                    ClienteId = o.ClienteId,
+                    Data = o.Data,
+                    ServicoId = o.ServicoId,
+                    HorarioId = o.HorarioId,
+                    Total = o.Total,
+                    Avaliado = o.Avaliado,
+                    Finalizado = o.Finalizado,
+                    Cancelado = o.Cancelado
+
+                })
+                .FirstOrDefault();
+
+            ordem.Avaliado = avaliado;
+
+            return ordemRepository.Update(ordem);
+        }
+
+        public bool CancelarOS(int id)
+        {
+            var ordem = ordemRepository.GetOrdemPorId(id)
+                .Select(o => new OrdemDeServico()
+                {
+                    Id = o.Id,
+                    ClienteId = o.ClienteId,
+                    Data = o.Data,
+                    ServicoId = o.ServicoId,
+                    HorarioId = o.HorarioId,
+                    Total = o.Total,
+                    Avaliado = o.Avaliado,
+                    Finalizado = o.Finalizado,
+                    Cancelado = o.Cancelado
+                })
+                .FirstOrDefault();
+
+            ordem.Cancelado = true;
+            return ordemRepository.Update(ordem);
         }
     }
 }

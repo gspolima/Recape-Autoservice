@@ -47,7 +47,7 @@ namespace Recape.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Lembrar de mim")]
+            [Display(Name = "Lembrar-se de mim")]
             public bool RememberMe { get; set; }
         }
 
@@ -59,7 +59,7 @@ namespace Recape.Areas.Identity.Pages.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            returnUrl ??= Url.Action("ListarAgendamentos", "Agendamentos");
+            returnUrl ??= Url.Action("Index", "Home");
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -71,7 +71,7 @@ namespace Recape.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Action("ListarAgendamentos", "Agendamentos");
+            returnUrl ??= Url.Action("Index", "Home");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -96,7 +96,7 @@ namespace Recape.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "O email e/ou senha estão incorretos");
+                    ModelState.AddModelError(string.Empty, "Email ou senha estão incorretos");
                     return Page();
                 }
             }

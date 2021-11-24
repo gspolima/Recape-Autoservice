@@ -80,3 +80,7 @@ body {
     background-color: #343a40;
     border-color: #f8f9fa;
 }
+
+i {
+    pointer-events: none;
+}

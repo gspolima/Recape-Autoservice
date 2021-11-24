@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Recape.Data.Repository.Servicos;
+using Recape.Services.OrdensDeServico;
 
 namespace Recape.Controllers
 {
@@ -10,10 +11,14 @@ namespace Recape.Controllers
     public class OrdensDeServicoApiController : ControllerBase
     {
         private readonly IServicoRepository servicoRepository;
+        private readonly IOrdemDeServicoService ordemDeServicoService;
 
-        public OrdensDeServicoApiController(IServicoRepository servicoRepository)
+        public OrdensDeServicoApiController(
+            IServicoRepository servicoRepository,
+            IOrdemDeServicoService ordemDeServicoService)
         {
             this.servicoRepository = servicoRepository;
+            this.ordemDeServicoService = ordemDeServicoService;
         }
 
         [HttpGet("valorServico/{servicoId}")]
@@ -22,6 +27,17 @@ namespace Recape.Controllers
             var valor = servicoRepository.GetValorPorServicoId(servicoId);
 
             return Ok(valor);
+        }
+
+        [HttpPost("cancelar/{ordemId}")]
+        public IActionResult CancelarOS(int ordemId)
+        {
+            var sucesso = ordemDeServicoService.CancelarOS(ordemId);
+
+            if (sucesso)
+                return Ok("json");
+
+            return StatusCode(500);
         }
     }
 }

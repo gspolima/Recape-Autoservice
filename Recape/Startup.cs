@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Recape.Data;
 using Recape.Data.Repository.AgendamentosConsulta;
+using Recape.Data.Repository.Comentarios;
 using Recape.Data.Repository.Especialidades;
 using Recape.Data.Repository.Horarios;
 using Recape.Data.Repository.Medicos;
@@ -49,6 +50,8 @@ namespace Recape
             });
 
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddScoped<IComentarioRepository, ComentarioRepository>();
 
             services.AddSingleton<IEmailService, EmailService>();
 

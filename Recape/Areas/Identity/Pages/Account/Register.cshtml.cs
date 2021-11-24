@@ -52,7 +52,7 @@ namespace Recape.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "Por favor, informe uma senha")]
             [StringLength(
                 25,
-                ErrorMessage = "A {0} deve ter pelo menos {2} caracteres e conter no mínimo um dígito.",
+                ErrorMessage = "A {0} deve ter pelo menos {2} caracteres.",
                 MinimumLength = 8)]
             [DataType(DataType.Password)]
             [Display(Name = "Senha")]
@@ -72,7 +72,7 @@ namespace Recape.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Action("ListarAgendamentos", "Agendamentos");
+            returnUrl ??= Url.Action("Index", "Home");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {

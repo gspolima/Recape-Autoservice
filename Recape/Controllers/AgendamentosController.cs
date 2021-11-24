@@ -11,7 +11,6 @@ using Recape.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Recape.Controllers
 {
@@ -83,7 +82,7 @@ namespace Recape.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> NovoAgendamento(NovoAgendamentoViewModel viewModel)
+        public ActionResult NovoAgendamento(NovoAgendamentoViewModel viewModel)
         {
             var dataHorarioFormatada = DateTime.Parse($"{viewModel.GetData()} {viewModel.GetHorario()}");
 

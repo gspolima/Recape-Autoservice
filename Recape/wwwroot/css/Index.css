@@ -59,6 +59,10 @@ section {
 }
 
 
+.list-group {
+    padding: 40px 0;
+}
+
 #fundadores {
     padding: 40px 0 10px 0;
     /*background-color: #f7f7f7;*/

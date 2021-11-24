@@ -14,6 +14,16 @@ namespace Recape.Data.Repository.OrdensDeServico
             this.dbContext = dbContext;
         }
 
+        public IQueryable<OrdemDeServico> GetOrdemPorId(int id)
+        {
+            var ordem = dbContext.OrdensDeServico
+                .Where(o => o.Id == id)
+                .Include(o => o.Servico)
+                .Include(o => o.Horario);
+
+            return ordem;
+        }
+
         public IQueryable<OrdemDeServico> GetOrdemPorCliente(string clienteId)
         {
             var ordem = dbContext.OrdensDeServico
@@ -63,6 +73,12 @@ namespace Recape.Data.Repository.OrdensDeServico
             var inseridos = dbContext.SaveChanges();
 
             return inseridos > 0;
+        }
+
+        public bool Update(OrdemDeServico ordem)
+        {
+            dbContext.Entry(ordem).State = EntityState.Modified;
+            return dbContext.SaveChanges() > 0;
         }
     }
 }

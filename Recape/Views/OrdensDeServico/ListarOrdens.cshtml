@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Ordens de Serviço";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_layout.cshtml";
 }
 
 <h2><i class='fas fa-list'></i>&nbsp;Ordens de Serviço</h2>
@@ -19,17 +19,58 @@
                     <th scope="col"><i class='fas fa-tools'></i>&nbsp;Serviço</th>
                     <th scope="col"><i class='fas fa-dollar-sign'></i>&nbsp;Valor</th>
                     <th scope="col"><i class='fas fa-calendar-alt'></i>&nbsp;Marcado para</th>
+                    <th scope="col"><i class='fas fa-cog'></i>&nbsp;Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var ordem in Model)
                 {
-                    <tr>
-                        <th scope="row">@ordem.Id</th>
-                        <td>@ordem.Servico</td>
-                        <td>R$ @ordem.Valor</td>
-                        <td>@ordem.Data às @ordem.Horario</td>
-                    </tr>
+                    @if(ordem.Concluido == true && ordem.Cancelado == false)
+                    {
+                        <tr style="background-color: #c4ffe5;">
+                            <th scope="row">@ordem.Id</th>
+                            <td>@ordem.Servico</td>
+                            <td>R$ @ordem.Valor</td>
+                            <td>@ordem.Data às @ordem.Horario</td>
+                            <td>
+                                @if(!ordem.Avaliado)
+                                {
+                                    <a class="btn btn-outline-primary" asp-action="DeixarComentario" asp-controller="Comentarios" asp-route-ordemId="@ordem.Id" data-toggle="tooltip" data-placement="right" title="Avaliar">
+                                        <i class='fas fa-comment-dots'></i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span>Avaliado</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                    else if (ordem.Concluido == false && ordem.Cancelado == true)
+                    {
+                        <tr style="background-color: #ffccc4;">
+                            <th scope="row">@ordem.Id</th>
+                            <td>@ordem.Servico</td>
+                            <td>R$ @ordem.Valor</td>
+                            <td>@ordem.Data às @ordem.Horario</td>
+                            <td>Cancelado</td>
+                        </tr>
+                    }
+                    else if (ordem.Concluido == false)
+                    {
+                        <tr>
+                            <th scope="row">@ordem.Id</th>
+                            <td>@ordem.Servico</td>
+                            <td>R$ @ordem.Valor</td>
+                            <td>@ordem.Data às @ordem.Horario</td>
+                            <td>
+                                <a data-os-id="@ordem.Id" class="btn btn-outline-danger btn-cancelar" data-toggle="tooltip" data-placement="right" title="Cancelar">
+                                    <i class='fas fa-trash'></i>
+                                </a>
+                                
+                            </td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
@@ -47,3 +88,7 @@ else
         margin-bottom: 1em;
     }
 </style>
+
+@section Scripts {
+    <script src="~/js/ListarOrdens.js"></script>
+}

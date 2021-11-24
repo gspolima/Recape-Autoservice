@@ -1,4 +1,4 @@
-﻿@*@model IndexViewModel*@
+﻿@model List<ComentarioViewModel>
 
 @{
     ViewData["Title"] = "Início";
@@ -82,15 +82,24 @@
             </div>
         </div>
     </div>
-    <hr />
 </section>
 
 <section id="comentarios">
     <h1 class="text-center text-light">O que os nossos clientes estão dizendo</h1>
     <div id="comentarios-container">
-
+        <div class="list-group">
+        @foreach(var comentario in Model)
+        {
+            <a class="list-group-item list-group-item-primary">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><span class="text-primary">@comentario.Cliente</span> sobre <span class="text-primary">@comentario.Servico</span></h5>
+                </div>
+                <p class="mb-1">@comentario.Texto</p>
+                <small>Serviço prestado em @comentario.Data.ToString("dd MMMM")</small>
+            </a>
+        }
+        </div>
     </div>
-    <hr />
 </section> 
 
 <h1 class="text-center text-light">Contato</h1>
