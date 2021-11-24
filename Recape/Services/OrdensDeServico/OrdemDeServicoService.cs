@@ -39,8 +39,8 @@ namespace Recape.Services.OrdensDeServico
                 .Select(o => new ConfirmacaoEmailViewModel
                 {
                     Id = o.Id,
-                    Cliente = o.Cliente.Email,
-                    ClienteEmail = o.Cliente.Email,
+                    NomeCliente = o.Cliente.NomeCompleto,
+                    EmailCliente = o.Cliente.Email,
                     Data = o.Data.ToString("dd/MM/yyyy"),
                     Horario = o.Horario.HoraDoDia.ToString("HH:mm"),
                     Total = o.Total,

@@ -1,15 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<Usuario> SignInManager
+@inject UserManager<Usuario> UserManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class='fas fa-user'></i>&nbsp; @UserManager.GetUserName(User)
+                <i class='fas fa-user'></i>&nbsp; @UserManager.GetUserAsync(User).Result.NomeCompleto
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item text-dark" style="pointer-events: none;"><i class='fa fa-envelope'></i>&nbsp; @UserManager.GetUserAsync(User).Result.Email</a>
                 <a class="dropdown-item text-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Identity/Account/Login")"><i class='fas fa-sign-out-alt'></i>&nbsp; Sair</a>
             </div>
         </li>
@@ -28,12 +29,13 @@
     }
     else
     {
-        <li class="nav-item">
-            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <li class="nav-item nav">
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">
+                <i class='fa fa-sign-in-alt'></i>&nbsp; Login</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link btn btn-outline-light text-light" asp-area="Identity" asp-page="/Account/Register">
-                Cadastre-se
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">
+                <i class='fa fa-user-plus'></i>&nbsp;Cadastre-se
             </a>
         </li>
     }

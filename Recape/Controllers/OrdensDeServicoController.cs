@@ -20,14 +20,14 @@ namespace Recape.Controllers
         private readonly IOrdemDeServicoService ordemService;
         private readonly IHorarioRepository horarioRepository;
         private readonly IEmailService emailService;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<Usuario> userManager;
 
         public OrdensDeServicoController(
             IServicoRepository servicoRepository,
             IOrdemDeServicoService ordemService,
             IHorarioRepository horarioRepository,
             IEmailService emailService,
-            UserManager<IdentityUser> userManager)
+            UserManager<Usuario> userManager)
         {
             this.servicoRepository = servicoRepository;
             this.ordemService = ordemService;
@@ -87,7 +87,7 @@ namespace Recape.Controllers
             if (sucesso)
             {
                 var dadosEmail = ordemService.GetDadosOrdemDeServicoParaEmail(usuarioLogado);
-                var corpoEmail = emailService.FormatarCorpoEmail(dadosEmail.Id, dadosEmail.Cliente, dadosEmail.ClienteEmail, dadosEmail.Data, dadosEmail.Horario, dadosEmail.Total, dadosEmail.Servico);
+                var corpoEmail = emailService.FormatarCorpoEmail(dadosEmail.Id, dadosEmail.NomeCliente, dadosEmail.EmailCliente, dadosEmail.Data, dadosEmail.Horario, dadosEmail.Total, dadosEmail.Servico);
 
                 var emailConfirmacao = new EmailAutomatico()
                 {

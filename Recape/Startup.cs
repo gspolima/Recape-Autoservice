@@ -17,6 +17,7 @@ using Recape.Data.Repository.Poltronas;
 using Recape.Data.Repository.Reservas;
 using Recape.Data.Repository.Servicos;
 using Recape.Data.Repository.Viagens;
+using Recape.Models;
 using Recape.Services.Email;
 using Recape.Services.OrdensDeServico;
 using System;
@@ -74,7 +75,7 @@ namespace Recape
 
             services.AddScoped<IReservaRepository, ReservaRepository>();
 
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<Usuario>(options =>
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(50))
                 .AddEntityFrameworkStores<RecapeDbContext>();
 

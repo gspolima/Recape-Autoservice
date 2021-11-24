@@ -25,7 +25,7 @@ namespace Recape.Controllers
             var comentarios = comentarioRepository.GetComentarios()
                 .Select(c => new ComentarioViewModel()
                 {
-                    Cliente = c.OrdemDeServico.Cliente.UserName,
+                    Cliente = c.OrdemDeServico.Cliente.NomeCompleto,
                     Servico = c.OrdemDeServico.Servico.Nome,
                     Texto = c.Texto,
                     Data = c.OrdemDeServico.Data

@@ -12,6 +12,13 @@
             <h4>Crie uma nova conta.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Input.NomeCompleto">Nome Completo</label>
+                <input asp-for="Input.NomeCompleto" type="text" class="form-control" />
+                <span asp-validation-for="Input.NomeCompleto" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" />

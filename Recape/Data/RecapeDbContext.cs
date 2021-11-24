@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -9,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Recape.Data
 {
-    public class RecapeDbContext : IdentityDbContext<IdentityUser>
+    public class RecapeDbContext : IdentityDbContext<Usuario>
     {
         private readonly IConfiguration configuration;
         private readonly ILogger<RecapeDbContext> logger;
@@ -21,6 +20,10 @@ namespace Recape.Data
         {
             this.configuration = configuration;
             this.logger = logger;
+        }
+
+        public RecapeDbContext(DbContextOptions<RecapeDbContext> options) : base(options)
+        {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -62,6 +65,9 @@ namespace Recape.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
+            base.OnModelCreating(builder);
+
             builder.Entity<Comentario>()
                 .Property(c => c.Texto)
                 .HasMaxLength(200)
@@ -354,8 +360,6 @@ namespace Recape.Data
                         DuracaoEmHoras = 36
                     }
                 );
-
-            base.OnModelCreating(builder);
         }
     }
 }
