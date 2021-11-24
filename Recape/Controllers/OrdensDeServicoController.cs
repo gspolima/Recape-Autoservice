@@ -87,7 +87,7 @@ namespace Recape.Controllers
             if (sucesso)
             {
                 var dadosEmail = ordemService.GetDadosOrdemDeServicoParaEmail(usuarioLogado);
-                var corpoEmail = emailService.FormatarCorpoEmail(dadosEmail.Id, dadosEmail.Cliente, dadosEmail.DataHorario, dadosEmail.Total, dadosEmail.Servico);
+                var corpoEmail = emailService.FormatarCorpoEmail(dadosEmail.Id, dadosEmail.Cliente, dadosEmail.ClienteEmail, dadosEmail.Data, dadosEmail.Horario, dadosEmail.Total, dadosEmail.Servico);
 
                 var emailConfirmacao = new EmailAutomatico()
                 {
