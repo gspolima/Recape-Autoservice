@@ -1,4 +1,5 @@
 ﻿using Recape.Models;
+using Recape.ViewModels;
 using System.Threading.Tasks;
 
 namespace Recape.Services.Email
@@ -6,6 +7,6 @@ namespace Recape.Services.Email
     public interface IEmailService
     {
         Task<bool> EnviarEmailAsync(EmailAutomatico email);
-        string FormatarCorpoEmail(int id, string nomeCliente, string emailCliente, string data, string horario, string total, string servico);
+        string FormatarCorpoEmail(ConfirmacaoEmailViewModel dadosEmail);
     }
 }
