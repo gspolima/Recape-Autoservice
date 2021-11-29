@@ -2,6 +2,7 @@
 using Recape.Models;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System;
 using System.Threading.Tasks;
 
 namespace Recape.Services.Email
@@ -20,7 +21,7 @@ namespace Recape.Services.Email
             // API Key should be defined in appsettings.json
             // OR
             // set in Application settings on Azure App Services
-            var apiKey = configuration.GetValue<string>("SendGrid:SENDGRID_API_KEY");
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
             var client = new SendGridClient(apiKey);
 
             var from = new EmailAddress("sampaioglima@gmail.com", "Recape Autopeças");
