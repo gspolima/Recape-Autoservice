@@ -27,7 +27,7 @@ namespace Recape.Services.Email
             var subject = email.Assunto;
             var to = new EmailAddress(email.Destinatario);
             var plainTextContent = email.Corpo;
-            var htmlContent = $"<strong>{email.Corpo}</strong>";
+            var htmlContent = email.Corpo;
 
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
