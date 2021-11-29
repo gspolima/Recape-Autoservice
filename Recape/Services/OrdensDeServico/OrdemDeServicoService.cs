@@ -4,6 +4,7 @@ using Recape.Models;
 using Recape.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Recape.Services.OrdensDeServico
@@ -68,9 +69,14 @@ namespace Recape.Services.OrdensDeServico
                     Cancelado = o.Cancelado,
                     Avaliado = o.Avaliado
                 })
-                .AsEnumerable()
-                .OrderBy(o => DateOnly.Parse(o.Data))
                 .ToList();
+
+            viewModel.
+                OrderBy(o => DateOnly.TryParse(
+                    o.Data,
+                    new CultureInfo("pt-BR"),
+                    DateTimeStyles.None,
+                    out var result));
 
             return viewModel;
         }
