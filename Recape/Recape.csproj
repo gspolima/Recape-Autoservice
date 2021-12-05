@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\css\ListarPoltronas.css" />
     <_ContentIncludedByDefault Remove="wwwroot\js\CriarOrdem.js" />
   </ItemGroup>
 
@@ -32,6 +31,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Certificates\" />
+    <Folder Include="DTOs\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
