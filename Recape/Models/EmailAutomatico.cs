@@ -1,9 +1,8 @@
-﻿namespace Recape.Models
+﻿namespace Recape.Models;
+
+public class EmailAutomatico
 {
-    public class EmailAutomatico
-    {
-        public string Assunto { get; set; }
-        public string Destinatario { get; set; }
-        public string Corpo { get; set; }
-    }
+    public string Assunto { get; set; }
+    public string Destinatario { get; set; }
+    public string Corpo { get; set; }
 }

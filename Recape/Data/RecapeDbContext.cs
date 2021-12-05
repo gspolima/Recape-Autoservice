@@ -1,91 +1,85 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Recape.Models;
-using System;
-using System.Collections.Generic;
 
-namespace Recape.Data
+namespace Recape.Data;
+
+public class RecapeDbContext : IdentityDbContext<Usuario>
 {
-    public class RecapeDbContext : IdentityDbContext<Usuario>
+    private readonly IConfiguration configuration;
+    private readonly ILogger<RecapeDbContext> logger;
+
+    public RecapeDbContext(
+        DbContextOptions<RecapeDbContext> options,
+        IConfiguration configuration,
+        ILogger<RecapeDbContext> logger) : base(options)
     {
-        private readonly IConfiguration configuration;
-        private readonly ILogger<RecapeDbContext> logger;
+        this.configuration = configuration;
+        this.logger = logger;
+    }
 
-        public RecapeDbContext(
-            DbContextOptions<RecapeDbContext> options,
-            IConfiguration configuration,
-            ILogger<RecapeDbContext> logger) : base(options)
+    public RecapeDbContext(DbContextOptions<RecapeDbContext> options) : base(options)
+    {
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
         {
-            this.configuration = configuration;
-            this.logger = logger;
-        }
+            var serverVersion = new MySqlServerVersion(new Version(5, 7, 32));
+            var connection = configuration.GetConnectionString("DbConnection");
 
-        public RecapeDbContext(DbContextOptions<RecapeDbContext> options) : base(options)
-        {
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                var serverVersion = new MySqlServerVersion(new Version(5, 7, 32));
-                var connection = configuration.GetConnectionString("DbConnection");
-
-                optionsBuilder
-                    .UseMySql(connection, serverVersion)
-                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-                    .LogTo(
-                        Console.WriteLine,
-                        new[]
-                        {
-                            DbLoggerCategory.Database.Command.Name
-                        },
-                        LogLevel.Information)
-                    .EnableDetailedErrors();
-            }
-
-            base.OnConfiguring(optionsBuilder);
-        }
-
-        public DbSet<Servico> Servicos { get; set; }
-        public DbSet<OrdemDeServico> OrdensDeServico { get; set; }
-        public DbSet<Horario> Horarios { get; set; }
-        public DbSet<Comentario> Comentarios { get; set; }
-
-        // --------------------------------------------------
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-
-            builder.Entity<Comentario>()
-                .Property(c => c.Texto)
-                .HasMaxLength(200)
-                .IsRequired();
-
-            builder.Entity<OrdemDeServico>()
-                .Property(o => o.Data)
-                .IsRequired();
-
-            builder.Entity<OrdemDeServico>()
-                .Property(o => o.Finalizado)
-                .HasDefaultValue(false)
-                .IsRequired();
-
-            builder.Entity<OrdemDeServico>()
-                .Property(o => o.Cancelado)
-                .HasDefaultValue(false)
-                .IsRequired();
-
-            builder.Entity<Horario>()
-                .Property(d => d.HoraDoDia)
-                .IsRequired();
-
-            builder.Entity<Horario>()
-                .HasData(
-                    new List<Horario>()
+            optionsBuilder
+                .UseMySql(connection, serverVersion)
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                .LogTo(
+                    Console.WriteLine,
+                    new[]
                     {
+                            DbLoggerCategory.Database.Command.Name
+                    },
+                    LogLevel.Information)
+                .EnableDetailedErrors();
+        }
+
+        base.OnConfiguring(optionsBuilder);
+    }
+
+    public DbSet<Servico> Servicos { get; set; }
+    public DbSet<OrdemDeServico> OrdensDeServico { get; set; }
+    public DbSet<Horario> Horarios { get; set; }
+    public DbSet<Comentario> Comentarios { get; set; }
+
+    // --------------------------------------------------
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+
+        builder.Entity<Comentario>()
+            .Property(c => c.Texto)
+            .HasMaxLength(200)
+            .IsRequired();
+
+        builder.Entity<OrdemDeServico>()
+            .Property(o => o.Data)
+            .IsRequired();
+
+        builder.Entity<OrdemDeServico>()
+            .Property(o => o.Finalizado)
+            .HasDefaultValue(false)
+            .IsRequired();
+
+        builder.Entity<OrdemDeServico>()
+            .Property(o => o.Cancelado)
+            .HasDefaultValue(false)
+            .IsRequired();
+
+        builder.Entity<Horario>()
+            .Property(d => d.HoraDoDia)
+            .IsRequired();
+
+        builder.Entity<Horario>()
+            .HasData(
+                new List<Horario>()
+                {
                         new Horario()
                         {
                             Id = 1,
@@ -136,23 +130,23 @@ namespace Recape.Data
                             Id = 10,
                             HoraDoDia = new TimeOnly(17, 0)
                         },
-                    }
-                );
+                }
+            );
 
-            builder.Entity<Servico>()
-                .Property(s => s.Nome)
-                .HasMaxLength(30)
-                .IsRequired();
+        builder.Entity<Servico>()
+            .Property(s => s.Nome)
+            .HasMaxLength(30)
+            .IsRequired();
 
-            builder.Entity<Servico>()
-                .Property(s => s.Valor)
-                .HasPrecision(7, 2)
-                .IsRequired();
+        builder.Entity<Servico>()
+            .Property(s => s.Valor)
+            .HasPrecision(7, 2)
+            .IsRequired();
 
-            builder.Entity<Servico>()
-                .HasData(
-                    new List<Servico>()
-                    {
+        builder.Entity<Servico>()
+            .HasData(
+                new List<Servico>()
+                {
                         new Servico()
                         {
                             Id = 1,
@@ -183,10 +177,9 @@ namespace Recape.Data
                             Nome = "Serviços de Reparo Geral",
                             Valor = 309.99m
                         }
-                    }
-                );
+                }
+            );
 
-            base.OnModelCreating(builder);
-        }
+        base.OnModelCreating(builder);
     }
 }

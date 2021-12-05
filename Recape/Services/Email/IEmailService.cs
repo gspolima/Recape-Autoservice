@@ -1,12 +1,10 @@
 ﻿using Recape.Models;
 using Recape.ViewModels;
-using System.Threading.Tasks;
 
-namespace Recape.Services.Email
+namespace Recape.Services.Email;
+
+public interface IEmailService
 {
-    public interface IEmailService
-    {
-        Task<bool> EnviarEmailAsync(EmailAutomatico email);
-        string FormatarCorpoEmail(ConfirmacaoEmailViewModel dadosEmail);
-    }
+    Task<bool> EnviarEmailAsync(EmailAutomatico email);
+    string FormatarCorpoEmail(ConfirmacaoEmailViewModel dadosEmail);
 }

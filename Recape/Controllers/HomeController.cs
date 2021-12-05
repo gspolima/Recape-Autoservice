@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Recape.Data.Repository.Comentarios;
-using Recape.ViewModels;
-using System.Diagnostics;
-using System.Linq;
+﻿using Recape.Data.Repository.Comentarios;
 
 namespace Recape.Controllers
 {

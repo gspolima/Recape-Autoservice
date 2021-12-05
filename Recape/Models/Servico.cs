@@ -1,9 +1,8 @@
-﻿namespace Recape.Models
+﻿namespace Recape.Models;
+
+public class Servico
 {
-    public class Servico
-    {
-        public int Id { get; set; }
-        public string Nome { get; set; }
-        public decimal Valor { get; set; }
-    }
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public decimal Valor { get; set; }
 }

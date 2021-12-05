@@ -1,22 +1,19 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
+﻿using System.Globalization;
 
-namespace Recape.Attributes
+namespace Recape.Attributes;
+
+public class DataFuturaAttribute : ValidationAttribute
 {
-    public class DataFuturaAttribute : ValidationAttribute
+    public override bool IsValid(object value)
     {
-        public override bool IsValid(object value)
-        {
-            DateTime data;
-            var isDataFutura = DateTime.TryParseExact(
-                Convert.ToString(value),
-                "yyyy-MM-dd",
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None,
-                out data);
+        DateTime data;
+        var isDataFutura = DateTime.TryParseExact(
+            Convert.ToString(value),
+            "yyyy-MM-dd",
+            CultureInfo.InvariantCulture,
+            DateTimeStyles.None,
+            out data);
 
-            return (isDataFutura && data > DateTime.Now);
-        }
+        return (isDataFutura && data > DateTime.Now);
     }
 }

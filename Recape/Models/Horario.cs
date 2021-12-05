@@ -1,10 +1,7 @@
-﻿using System;
+﻿namespace Recape.Models;
 
-namespace Recape.Models
+public class Horario
 {
-    public class Horario
-    {
-        public int Id { get; set; }
-        public TimeOnly HoraDoDia { get; set; }
-    }
+    public int Id { get; set; }
+    public TimeOnly HoraDoDia { get; set; }
 }

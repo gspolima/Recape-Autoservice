@@ -5,6 +5,7 @@
     <UserSecretsId>aspnet-Recape-3599DF3A-A908-4B35-B482-E7732073ABA2</UserSecretsId>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
     <StartupObject>Recape.Program</StartupObject>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
