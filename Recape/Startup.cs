@@ -7,16 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Recape.Data;
-using Recape.Data.Repository.AgendamentosConsulta;
 using Recape.Data.Repository.Comentarios;
-using Recape.Data.Repository.Especialidades;
 using Recape.Data.Repository.Horarios;
-using Recape.Data.Repository.Medicos;
 using Recape.Data.Repository.OrdensDeServico;
-using Recape.Data.Repository.Poltronas;
-using Recape.Data.Repository.Reservas;
 using Recape.Data.Repository.Servicos;
-using Recape.Data.Repository.Viagens;
 using Recape.Models;
 using Recape.Services.Email;
 using Recape.Services.OrdensDeServico;
@@ -62,18 +56,6 @@ namespace Recape
             services.AddScoped<IOrdemDeServicoService, OrdemDeServicoService>();
 
             services.AddScoped<IServicoRepository, ServicoRepository>();
-
-            services.AddScoped<IPoltronaRepository, PoltronaRepository>();
-
-            services.AddScoped<IViagemRepository, ViagemRepository>();
-
-            services.AddScoped<IMedicoRepository, MedicoRepository>();
-
-            services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
-
-            services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
-
-            services.AddScoped<IReservaRepository, ReservaRepository>();
 
             services.AddDefaultIdentity<Usuario>(options =>
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(50))
