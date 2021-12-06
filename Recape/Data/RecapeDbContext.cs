@@ -47,12 +47,25 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
     public DbSet<OrdemDeServico> OrdensDeServico { get; set; }
     public DbSet<Horario> Horarios { get; set; }
     public DbSet<Comentario> Comentarios { get; set; }
+    public DbSet<Veiculo> Veiculos { get; set; }
 
     // --------------------------------------------------
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.Entity<Veiculo>()
+            .HasKey(v => new { v.Placa, v.ProprietarioId });
+
+        builder.Entity<Veiculo>()
+            .Property(v => v.Placa)
+            .IsRequired()
+            .HasMaxLength(7);
+
+        builder.Entity<Veiculo>()
+            .Property(v => v.Modelo)
+            .IsRequired();
 
         builder.Entity<Comentario>()
             .Property(c => c.Texto)
