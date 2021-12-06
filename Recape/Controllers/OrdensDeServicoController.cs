@@ -55,7 +55,7 @@ public class OrdensDeServicoController : Controller
             return View("CriarOrdem", viewModel);
         }
 
-        var existeConflito = ordemService.verificarDisponibilidadeHorario(
+        var existeConflito = ordemService.verificarDisponibilidade(
             viewModel.ServicoId,
             viewModel.Data,
             viewModel.HorarioId);

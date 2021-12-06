@@ -36,7 +36,8 @@ public class OrdemDeServicoRepository : IOrdemDeServicoRepository
             .Where(
                 o => o.ServicoId == servicoId &&
                 o.Data == data &&
-                o.HorarioId == horarioId)
+                o.HorarioId == horarioId &&
+                o.Status == Situacao.Aberto)
             .Any();
 
         return existe;
