@@ -4,9 +4,7 @@ public class OrdemDeServico
 {
     public int Id { get; set; }
     public DateOnly Data { get; set; }
-    public bool Finalizado { get; set; }
-    public bool Cancelado { get; set; }
-    public bool Avaliado { get; set; }
+    public Situacao Status { get; set; }
     public string Total { get; set; }
     public Servico Servico { get; set; }
     public int ServicoId { get; set; }

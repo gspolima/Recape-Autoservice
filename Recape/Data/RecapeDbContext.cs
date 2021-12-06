@@ -52,6 +52,7 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        base.OnModelCreating(builder);
 
         builder.Entity<Comentario>()
             .Property(c => c.Texto)
@@ -63,14 +64,8 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
             .IsRequired();
 
         builder.Entity<OrdemDeServico>()
-            .Property(o => o.Finalizado)
-            .HasDefaultValue(false)
-            .IsRequired();
-
-        builder.Entity<OrdemDeServico>()
-            .Property(o => o.Cancelado)
-            .HasDefaultValue(false)
-            .IsRequired();
+            .Property(o => o.Status)
+            .HasConversion<string>();
 
         builder.Entity<Horario>()
             .Property(d => d.HoraDoDia)
@@ -180,6 +175,6 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
                 }
             );
 
-        base.OnModelCreating(builder);
+
     }
 }

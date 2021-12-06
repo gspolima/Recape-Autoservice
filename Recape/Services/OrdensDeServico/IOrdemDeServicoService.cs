@@ -1,6 +1,4 @@
-﻿using Recape.ViewModels;
-
-namespace Recape.Services.OrdensDeServico;
+﻿namespace Recape.Services.OrdensDeServico;
 
 public interface IOrdemDeServicoService
 {
@@ -8,7 +6,7 @@ public interface IOrdemDeServicoService
     ConfirmacaoEmailViewModel GetDadosOrdemDeServicoParaEmail(string clienteId);
     List<OrdemDeServicoViewModel> GetOrdensDeServico(string clienteId);
     bool InserirOrdem(string clienteId, NovaOrdemDeServicoViewModel viewModel);
-    bool verificarDisponibilidadeHorario(int servicoId, string data, int horarioId);
-    bool AtualizarOSAvaliada(int id, bool avaliado);
+    bool verificarDisponibilidade(int servicoId, string data, int horarioId);
+    bool AtualizarStatusAoAvaliar(int id);
     bool CancelarOS(int id);
 }

@@ -6,7 +6,5 @@ public class OrdemDeServicoViewModel
     public decimal Valor { get; set; }
     public string Data { get; set; }
     public string Horario { get; set; }
-    public bool Concluido { get; set; }
-    public bool Cancelado { get; set; }
-    public bool Avaliado { get; set; }
+    public Situacao Status { get; set; }
 }

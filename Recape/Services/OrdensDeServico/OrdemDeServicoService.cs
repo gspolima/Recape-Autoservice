@@ -59,9 +59,7 @@ public class OrdemDeServicoService : IOrdemDeServicoService
                 Valor = o.Servico.Valor,
                 Data = o.Data.ToString("dd/MM/yyyy"),
                 Horario = o.Horario.HoraDoDia.ToString("HH:mm"),
-                Concluido = o.Finalizado,
-                Cancelado = o.Cancelado,
-                Avaliado = o.Avaliado
+                Status = o.Status
             })
             .ToList();
 
@@ -91,7 +89,7 @@ public class OrdemDeServicoService : IOrdemDeServicoService
         return sucesso;
     }
 
-    public bool verificarDisponibilidadeHorario(int servicoId, string data, int horarioId)
+    public bool verificarDisponibilidade(int servicoId, string data, int horarioId)
     {
         var dataFormatada = DateOnly.ParseExact(data, "yyyy-MM-dd");
         var existe = ordemRepository.Exists(servicoId, dataFormatada, horarioId);
@@ -99,7 +97,7 @@ public class OrdemDeServicoService : IOrdemDeServicoService
         return existe;
     }
 
-    public bool AtualizarOSAvaliada(int id, bool avaliado)
+    public bool AtualizarStatusAoAvaliar(int id)
     {
         var ordem = ordemRepository.GetOrdemPorId(id)
             .Select(o => new OrdemDeServico()
@@ -110,14 +108,15 @@ public class OrdemDeServicoService : IOrdemDeServicoService
                 ServicoId = o.ServicoId,
                 HorarioId = o.HorarioId,
                 Total = o.Total,
-                Avaliado = o.Avaliado,
-                Finalizado = o.Finalizado,
-                Cancelado = o.Cancelado
+                Status = o.Status
 
             })
             .FirstOrDefault();
 
-        ordem.Avaliado = avaliado;
+        if (ordem.Status == Situacao.Avaliado)
+            return false;
+
+        ordem.Status = Situacao.Avaliado;
 
         return ordemRepository.Update(ordem);
     }
@@ -133,13 +132,15 @@ public class OrdemDeServicoService : IOrdemDeServicoService
                 ServicoId = o.ServicoId,
                 HorarioId = o.HorarioId,
                 Total = o.Total,
-                Avaliado = o.Avaliado,
-                Finalizado = o.Finalizado,
-                Cancelado = o.Cancelado
+                Status = o.Status
             })
             .FirstOrDefault();
 
-        ordem.Cancelado = true;
+        if (ordem.Status == Situacao.Cancelado)
+            return false;
+
+        ordem.Status = Situacao.Cancelado;
+
         return ordemRepository.Update(ordem);
     }
 }

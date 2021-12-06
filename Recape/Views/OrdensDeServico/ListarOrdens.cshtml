@@ -25,38 +25,7 @@
             <tbody>
                 @foreach (var ordem in Model)
                 {
-                    @if(ordem.Concluido == true && ordem.Cancelado == false)
-                    {
-                        <tr style="background-color: #c4ffe5;">
-                            <th scope="row">@ordem.Id</th>
-                            <td>@ordem.Servico</td>
-                            <td>R$ @ordem.Valor</td>
-                            <td>@ordem.Data às @ordem.Horario</td>
-                            <td>
-                                @if(!ordem.Avaliado)
-                                {
-                                    <a class="btn btn-outline-primary" asp-action="DeixarComentario" asp-controller="Comentarios" asp-route-ordemId="@ordem.Id" data-toggle="tooltip" data-placement="right" title="Avaliar">
-                                        <i class='fas fa-comment-dots'></i>
-                                    </a>
-                                }
-                                else
-                                {
-                                    <span>Avaliado</span>
-                                }
-                            </td>
-                        </tr>
-                    }
-                    else if (ordem.Concluido == false && ordem.Cancelado == true)
-                    {
-                        <tr style="background-color: #ffccc4;">
-                            <th scope="row">@ordem.Id</th>
-                            <td>@ordem.Servico</td>
-                            <td>R$ @ordem.Valor</td>
-                            <td>@ordem.Data às @ordem.Horario</td>
-                            <td>Cancelado</td>
-                        </tr>
-                    }
-                    else if (ordem.Concluido == false)
+                    if (ordem.Status == Situacao.Aberto)
                     {
                         <tr>
                             <th scope="row">@ordem.Id</th>
@@ -67,8 +36,44 @@
                                 <a data-os-id="@ordem.Id" class="btn btn-outline-danger btn-cancelar" data-toggle="tooltip" data-placement="right" title="Cancelar">
                                     <i class='fas fa-trash'></i>
                                 </a>
-                                
                             </td>
+                        </tr>
+                    }
+
+                    else if (ordem.Status == Situacao.Finalizado)
+                    {
+                        <tr style="background-color: #c4ffe5;">
+                            <th scope="row">@ordem.Id</th>
+                            <td>@ordem.Servico</td>
+                            <td>R$ @ordem.Valor</td>
+                            <td>@ordem.Data às @ordem.Horario</td>
+                            <td>
+                                <a class="btn btn-outline-primary" asp-action="DeixarComentario" asp-controller="Comentarios" asp-route-ordemId="@ordem.Id" data-toggle="tooltip" data-placement="right" title="Avaliar">
+                                    <i class='fas fa-comment-dots'></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                    else if (ordem.Status == Situacao.Avaliado)
+                    {
+                        <tr style="background-color: #c4ffe5;">
+                            <th scope="row">@ordem.Id</th>
+                            <td>@ordem.Servico</td>
+                            <td>R$ @ordem.Valor</td>
+                            <td>@ordem.Data às @ordem.Horario</td>
+                            <td><span>Avaliado</span></td>
+                        </tr>
+                    }
+
+                    else if (ordem.Status == Situacao.Cancelado)
+                    {
+                        <tr style="background-color: #ffccc4;">
+                            <th scope="row">@ordem.Id</th>
+                            <td>@ordem.Servico</td>
+                            <td>R$ @ordem.Valor</td>
+                            <td>@ordem.Data às @ordem.Horario</td>
+                            <td>Cancelado</td>
                         </tr>
                     }
                 }

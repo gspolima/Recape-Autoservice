@@ -56,7 +56,7 @@ public class ComentariosController : Controller
 
         if (sucesso)
         {
-            ordemService.AtualizarOSAvaliada(comentarioViewModel.ServicoId, true);
+            ordemService.AtualizarStatusAoAvaliar(comentarioViewModel.ServicoId);
             return RedirectToAction("ListarOrdens", "OrdensDeServico");
         }
 

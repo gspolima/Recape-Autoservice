@@ -23,9 +23,7 @@ public class ComentarioRepository : IComentarioRepository
             .ThenInclude(o => o.Servico)
             .Include(c => c.OrdemDeServico)
             .ThenInclude(o => o.Cliente)
-            .Where(c =>
-                c.OrdemDeServico.Avaliado == true &&
-                c.OrdemDeServico.Finalizado == true);
+            .Where(c => c.OrdemDeServico.Status == Situacao.Avaliado);
 
         return comentarios;
     }
