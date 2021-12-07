@@ -67,6 +67,10 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
             .Property(v => v.Modelo)
             .IsRequired();
 
+        builder.Entity<Veiculo>()
+            .Property(v => v.Tipo)
+            .HasConversion<string>();
+
         builder.Entity<Comentario>()
             .Property(c => c.Texto)
             .HasMaxLength(200)
