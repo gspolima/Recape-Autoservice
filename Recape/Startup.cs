@@ -5,6 +5,7 @@ using Recape.Data.Repository.OrdensDeServico;
 using Recape.Data.Repository.Servicos;
 using Recape.Services.Email;
 using Recape.Services.OrdensDeServico;
+using Recape.Services.Servicos;
 
 namespace Recape;
 
@@ -46,6 +47,7 @@ public class Startup
         services.AddScoped<IOrdemDeServicoService, OrdemDeServicoService>();
 
         services.AddScoped<IServicoRepository, ServicoRepository>();
+        services.AddScoped<IServicoService, ServicoService>();
 
         services.AddDefaultIdentity<Usuario>(options =>
             options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(50))

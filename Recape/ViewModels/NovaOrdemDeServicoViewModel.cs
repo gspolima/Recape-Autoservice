@@ -9,6 +9,11 @@ public class NovaOrdemDeServicoViewModel : DataViewModel
     [Required(ErrorMessage = "Um serviço deve ser selecionado")]
     public int ServicoId { get; set; }
 
+
+    public SelectList TiposVeiculo { get; set; }
+
+    public string TipoSelecionado { get; set; }
+
     public SelectList Horarios { get; set; }
 
     [Required(ErrorMessage = "Um horário deve ser selecionado")]
@@ -17,4 +22,7 @@ public class NovaOrdemDeServicoViewModel : DataViewModel
     public bool ExisteConflito { get; set; }
 
     public string Valor { get; set; }
+
+    public string Placa { get; set; }
+    public string Modelo { get; set; }
 }

@@ -3,5 +3,4 @@
 public interface IServicoRepository
 {
     IQueryable<Servico> GetServicos();
-    decimal GetValorPorServicoId(int id);
 }

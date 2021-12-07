@@ -128,9 +128,29 @@ public class OrdensDeServicoController : Controller
         return new SelectList(horarios, "Id", "HoraDoDia");
     }
 
+    private SelectList PopularListaTiposVeiculo()
+    {
+        var tipos = new List<TipoVeiculoViewModel>()
+        {
+            new TipoVeiculoViewModel()
+            {
+                Tipo = "carro",
+                NomeDeExibicao =  "Carro"
+            },
+            new TipoVeiculoViewModel()
+            {
+                Tipo = "moto",
+                NomeDeExibicao =  "Moto"
+            }
+        };
+
+        return new SelectList(tipos, "Tipo", "NomeDeExibicao");
+    }
+
     private void PopularListas(NovaOrdemDeServicoViewModel viewModel)
     {
-        viewModel.Servicos = PopularListaServicos();
+        // viewModel.Servicos = PopularListaServicos();
+        viewModel.TiposVeiculo = PopularListaTiposVeiculo();
         viewModel.Horarios = PopularListaHorarios();
     }
 }
