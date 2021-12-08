@@ -77,11 +77,19 @@ public class OrdemDeServicoService : IOrdemDeServicoService
     {
         var ordem = new OrdemDeServico()
         {
+            Status = Situacao.Aberto,
             ClienteId = clienteId,
             Data = viewModel.GetData(),
             ServicoId = viewModel.ServicoId,
             HorarioId = viewModel.HorarioId,
-            Total = viewModel.Valor
+            Total = viewModel.Valor,
+            Veiculo = new Veiculo()
+            {
+                Placa = viewModel.Placa,
+                Modelo = viewModel.Modelo,
+                ProprietarioId = clienteId,
+                Tipo = Enum.Parse<TipoVeiculo>(viewModel.TipoSelecionado)
+            }
         };
 
         var sucesso = ordemRepository.Insert(ordem);

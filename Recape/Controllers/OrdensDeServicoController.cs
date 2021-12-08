@@ -55,12 +55,12 @@ public class OrdensDeServicoController : Controller
             return View("CriarOrdem", viewModel);
         }
 
-        var existeConflito = ordemService.verificarDisponibilidade(
+        var existeConflitoDeData = ordemService.verificarDisponibilidade(
             viewModel.ServicoId,
             viewModel.Data,
             viewModel.HorarioId);
 
-        if (existeConflito)
+        if (existeConflitoDeData)
         {
             ModelState.AddModelError(
                 "ExisteConflito",
@@ -101,20 +101,6 @@ public class OrdensDeServicoController : Controller
     }
 
 
-    private SelectList PopularListaServicos()
-    {
-        var servicos = servicoRepository.GetServicos()
-            .Select(s => new
-            {
-                Id = s.Id,
-                Nome = s.Nome
-            })
-            .OrderBy(s => s.Nome)
-            .ToList();
-
-        return new SelectList(servicos, "Id", "Nome");
-    }
-
     private SelectList PopularListaHorarios()
     {
         var horarios = horarioRepository.GetHorarios()
@@ -134,12 +120,12 @@ public class OrdensDeServicoController : Controller
         {
             new TipoVeiculoViewModel()
             {
-                Tipo = "carro",
+                Tipo = "Carro",
                 NomeDeExibicao =  "Carro"
             },
             new TipoVeiculoViewModel()
             {
-                Tipo = "moto",
+                Tipo = "Moto",
                 NomeDeExibicao =  "Moto"
             }
         };
@@ -149,7 +135,6 @@ public class OrdensDeServicoController : Controller
 
     private void PopularListas(NovaOrdemDeServicoViewModel viewModel)
     {
-        // viewModel.Servicos = PopularListaServicos();
         viewModel.TiposVeiculo = PopularListaTiposVeiculo();
         viewModel.Horarios = PopularListaHorarios();
     }
