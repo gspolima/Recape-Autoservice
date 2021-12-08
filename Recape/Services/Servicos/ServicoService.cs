@@ -25,7 +25,7 @@ public class ServicoService : IServicoService
     {
         List<ServicoViewModel> lista;
 
-        if (tipoVeiculo == "moto")
+        if (tipoVeiculo == "Moto")
         {
             lista = servicoRepository.GetServicos()
                 .Where(s => s.Nome != "Alinhamento")
