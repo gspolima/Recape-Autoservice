@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Recape.Data;
 
@@ -81,10 +82,6 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
             .HasMaxLength(200)
             .IsRequired();
 
-        builder.Entity<Servico>()
-            .Property(s => s.TempoDeExecucao)
-            .IsRequired();
-
         builder.Entity<OrdemDeServico>()
             .Property(o => o.Data)
             .IsRequired();
@@ -163,6 +160,12 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
             .Property(s => s.Valor)
             .HasPrecision(7, 2)
             .IsRequired();
+
+        builder.Entity<Servico>()
+            .Property(s => s.TempoDeExecucao)
+            .IsRequired()
+            .HasColumnType("bigint")
+            .HasConversion(new TimeSpanToTicksConverter());
 
         builder.Entity<Servico>()
             .HasData(
