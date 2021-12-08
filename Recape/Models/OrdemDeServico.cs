@@ -7,7 +7,7 @@ public class OrdemDeServico
     public Situacao Status { get; set; }
     public string Total { get; set; }
     public Veiculo Veiculo { get; set; }
-    public string VeiculoId { get; set; }
+    public int VeiculoId { get; set; }
     public Servico Servico { get; set; }
     public int ServicoId { get; set; }
     public Usuario Cliente { get; set; }

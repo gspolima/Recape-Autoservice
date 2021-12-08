@@ -54,10 +54,8 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(builder);
-
         builder.Entity<Veiculo>()
-            .HasKey(v => v.Placa);
+            .HasKey(v => v.Id);
 
         builder.Entity<Veiculo>()
             .HasOne<Usuario>(v => v.Proprietario)
@@ -66,8 +64,8 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
             .IsRequired();
 
         builder.Entity<Veiculo>()
-            .Property(v => v.Placa)
-            .HasMaxLength(7);
+            .HasIndex(v => v.Placa, "IX_Veiculos_Placa")
+                .IsUnique();
 
         builder.Entity<Veiculo>()
             .Property(v => v.Modelo)
@@ -209,6 +207,6 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
                 }
             );
 
-
+        base.OnModelCreating(builder);
     }
 }
