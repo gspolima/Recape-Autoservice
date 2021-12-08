@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recape.Data;
 
@@ -10,9 +11,10 @@ using Recape.Data;
 namespace Recape.Data.Migrations
 {
     [DbContext(typeof(RecapeDbContext))]
-    partial class RecapeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211208155351_Correcoes_OS_Veiculo_Servico")]
+    partial class Correcoes_OS_Veiculo_Servico
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -419,7 +421,6 @@ namespace Recape.Data.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("ProprietarioId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Tipo")
@@ -530,9 +531,7 @@ namespace Recape.Data.Migrations
                 {
                     b.HasOne("Recape.Models.Usuario", "Proprietario")
                         .WithMany("Veiculos")
-                        .HasForeignKey("ProprietarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProprietarioId");
 
                     b.Navigation("Proprietario");
                 });

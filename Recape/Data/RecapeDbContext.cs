@@ -56,11 +56,16 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
         base.OnModelCreating(builder);
 
         builder.Entity<Veiculo>()
-            .HasKey(v => new { v.Placa, v.ProprietarioId });
+            .HasKey(v => v.Placa);
+
+        builder.Entity<Veiculo>()
+            .HasOne<Usuario>(v => v.Proprietario)
+            .WithMany(u => u.Veiculos)
+            .HasForeignKey(v => v.ProprietarioId)
+            .IsRequired();
 
         builder.Entity<Veiculo>()
             .Property(v => v.Placa)
-            .IsRequired()
             .HasMaxLength(7);
 
         builder.Entity<Veiculo>()
@@ -74,6 +79,10 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
         builder.Entity<Comentario>()
             .Property(c => c.Texto)
             .HasMaxLength(200)
+            .IsRequired();
+
+        builder.Entity<Servico>()
+            .Property(s => s.TempoDeExecucao)
             .IsRequired();
 
         builder.Entity<OrdemDeServico>()
@@ -163,31 +172,36 @@ public class RecapeDbContext : IdentityDbContext<Usuario>
                         {
                             Id = 1,
                             Nome = "Troca de Óleo",
-                            Valor = 249.99m
+                            Valor = 249.99m,
+                            TempoDeExecucao = new TimeSpan(2, 0, 0)
                         },
                         new Servico()
                         {
                             Id = 2,
                             Nome = "Alinhamento",
-                            Valor = 129.99m
+                            Valor = 129.99m,
+                            TempoDeExecucao = new TimeSpan(8, 0, 0)
                         },
                         new Servico()
                         {
                             Id = 3,
                             Nome = "Funilaria",
-                            Valor = 199.99m
+                            Valor = 199.99m,
+                            TempoDeExecucao = new TimeSpan(60, 0, 0)
                         },
                         new Servico()
                         {
                             Id = 4,
                             Nome = "Pintura",
-                            Valor = 179.99m
+                            Valor = 179.99m,
+                            TempoDeExecucao = new TimeSpan(72, 0, 0)
                         },
                         new Servico()
                         {
                             Id = 5,
                             Nome = "Serviços de Reparo Geral",
-                            Valor = 309.99m
+                            Valor = 309.99m,
+                            TempoDeExecucao = new TimeSpan(120, 0, 0)
                         }
                 }
             );
