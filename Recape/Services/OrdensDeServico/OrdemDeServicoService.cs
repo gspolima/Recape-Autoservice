@@ -85,7 +85,7 @@ public class OrdemDeServicoService : IOrdemDeServicoService
             Total = viewModel.Valor,
             Veiculo = new Veiculo()
             {
-                Placa = viewModel.Placa,
+                Placa = viewModel.Placa.ToUpper(),
                 Modelo = viewModel.Modelo,
                 ProprietarioId = clienteId,
                 Tipo = Enum.Parse<TipoVeiculo>(viewModel.TipoSelecionado)

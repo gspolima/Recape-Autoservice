@@ -30,7 +30,7 @@ function enviarRequest(valor) {
 
 let $listaTiposVeiculo = $('#listaTipos');
 
-$listaTiposVeiculo.change(function () {
+$listaTiposVeiculo.blur(function () {
     let tipoSelecionado = $listaTiposVeiculo.find('option:selected').val();
     console.log(tipoSelecionado);
     enviarRequestListaServicos(tipoSelecionado);

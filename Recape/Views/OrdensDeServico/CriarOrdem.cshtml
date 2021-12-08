@@ -22,12 +22,13 @@
 
                 <option selected="selected" value="">-- Selecione um tipo --</option>
             </select>
+            <span asp-validation-for="@Model.TipoSelecionado" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Placa">Placa<span class="text-danger">&nbsp;*</span></label>
             <input class="form-control" asp-for="Placa" type="text"/>
-            <span asp-validation-for="TipoSelecionado" class="text-danger"></span>
+            <span asp-validation-for="Placa" class="text-danger"></span>
         </div>
 
         <div class="form-group">

@@ -1,31 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Recape.Data.Repository.Horarios;
-using Recape.Data.Repository.Servicos;
 using Recape.Services.Email;
 using Recape.Services.OrdensDeServico;
+using Recape.Services.Veiculos;
 
 namespace Recape.Controllers;
 
 [Authorize]
 public class OrdensDeServicoController : Controller
 {
-    private readonly IServicoRepository servicoRepository;
     private readonly IOrdemDeServicoService ordemService;
     private readonly IHorarioRepository horarioRepository;
     private readonly IEmailService emailService;
+    private readonly IVeiculoService veiculoService;
     private readonly UserManager<Usuario> userManager;
 
     public OrdensDeServicoController(
-        IServicoRepository servicoRepository,
         IOrdemDeServicoService ordemService,
         IHorarioRepository horarioRepository,
         IEmailService emailService,
+        IVeiculoService veiculoService,
         UserManager<Usuario> userManager)
     {
-        this.servicoRepository = servicoRepository;
         this.ordemService = ordemService;
         this.horarioRepository = horarioRepository;
         this.emailService = emailService;
+        this.veiculoService = veiculoService;
         this.userManager = userManager;
     }
 
@@ -49,16 +49,19 @@ public class OrdensDeServicoController : Controller
     [HttpPost]
     public async Task<ActionResult> CriarOrdem(NovaOrdemDeServicoViewModel viewModel)
     {
+        var usuarioLogadoId = userManager.GetUserId(User);
+
         if (!ModelState.IsValid)
         {
             PopularListas(viewModel);
             return View("CriarOrdem", viewModel);
         }
 
-        var existeConflitoDeData = ordemService.verificarDisponibilidade(
-            viewModel.ServicoId,
-            viewModel.Data,
-            viewModel.HorarioId);
+        var existeConflitoDeData = ordemService
+            .verificarDisponibilidade(
+                viewModel.ServicoId,
+                viewModel.Data,
+                viewModel.HorarioId);
 
         if (existeConflitoDeData)
         {
@@ -67,20 +70,42 @@ public class OrdensDeServicoController : Controller
                 "Horário já reservado para o serviço e data selecionados. Escolha outro horário.");
         }
 
+        var veiculoJaExiste = veiculoService.VeiculoExiste(viewModel.Placa);
+
+        if (veiculoJaExiste)
+        {
+            var pertenceAoUsuarioLogado = veiculoService
+                .VeiculoPertenceAoUsuario(viewModel.Placa, usuarioLogadoId);
+
+            if (pertenceAoUsuarioLogado)
+            {
+                ModelState.AddModelError(
+                    "Placa",
+                    "Este veículo já existe e pertence a você");
+            }
+            else
+            {
+                ModelState.AddModelError(
+                    "Placa",
+                    "Este veículo pertence a outro cliente");
+            }
+        }
+
         if (!TryValidateModel(ModelState))
         {
             PopularListas(viewModel);
             return View("CriarOrdem", viewModel);
         }
 
-        var usuarioLogado = userManager.GetUserId(User);
-
-        var sucesso = ordemService.InserirOrdem(usuarioLogado, viewModel);
+        var sucesso = ordemService
+            .InserirOrdem(usuarioLogadoId, viewModel);
 
         if (sucesso)
         {
-            var dadosEmail = ordemService.GetDadosOrdemDeServicoParaEmail(usuarioLogado);
-            var corpoEmail = emailService.FormatarCorpoEmail(dadosEmail);
+            var dadosEmail = ordemService
+                .GetDadosOrdemDeServicoParaEmail(usuarioLogadoId);
+            var corpoEmail = emailService
+                .FormatarCorpoEmail(dadosEmail);
 
             var emailConfirmacao = new EmailAutomatico()
             {
@@ -89,9 +114,10 @@ public class OrdensDeServicoController : Controller
                 Corpo = corpoEmail
             };
 
-            var enviado = await emailService.EnviarEmailAsync(emailConfirmacao);
+            var emailEnviado = await emailService
+                .EnviarEmailAsync(emailConfirmacao);
 
-            if (enviado)
+            if (emailEnviado)
                 return RedirectToAction("ListarOrdens");
 
             return StatusCode(500);
