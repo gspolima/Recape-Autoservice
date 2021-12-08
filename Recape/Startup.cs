@@ -3,9 +3,11 @@ using Recape.Data.Repository.Comentarios;
 using Recape.Data.Repository.Horarios;
 using Recape.Data.Repository.OrdensDeServico;
 using Recape.Data.Repository.Servicos;
+using Recape.Data.Repository.Veiculos;
 using Recape.Services.Email;
 using Recape.Services.OrdensDeServico;
 using Recape.Services.Servicos;
+using Recape.Services.Veiculos;
 
 namespace Recape;
 
@@ -49,8 +51,10 @@ public class Startup
         services.AddScoped<IServicoRepository, ServicoRepository>();
         services.AddScoped<IServicoService, ServicoService>();
 
-        services.AddDefaultIdentity<Usuario>(options =>
-            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(50))
+        services.AddScoped<IVeiculoRepository, VeiculoRepository>();
+        services.AddScoped<IVeiculoService, VeiculoService>();
+
+        services.AddDefaultIdentity<Usuario>()
             .AddEntityFrameworkStores<RecapeDbContext>();
 
         services.Configure<IdentityOptions>(options =>
