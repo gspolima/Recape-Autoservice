@@ -34,6 +34,7 @@ public class ServicoService : IServicoService
                     Id = s.Id,
                     Nome = s.Nome
                 })
+                .OrderBy(s => s.Nome)
                 .ToList();
 
             return lista;
@@ -45,6 +46,7 @@ public class ServicoService : IServicoService
                 Id = s.Id,
                 Nome = s.Nome
             })
+            .OrderBy(s => s.Nome)
             .ToList();
 
         return lista;
