@@ -11,72 +11,137 @@
 <h2><i class='fas fa-file-contract'></i>&nbsp;&nbsp;Nova OS</h2>
 <hr />
 
-<div class="col-sm-4">
+<div class="col-md-6">
     <form asp-controller="OrdensDeServico" asp-action="CriarOrdem" method="post">
 
-        <div class="form-group">
-            <label asp-for="TipoSelecionado">Tipo de veículo<span class="text-danger">&nbsp;*</span></label>
-            <select id="listaTipos" class="form-control" 
-                asp-items="Model.TiposVeiculo"
-                asp-for="TipoSelecionado">
+        @if (Model.VeiculosCadastrados.Count() > 0)
+        {
+            <fieldset>
+                <legend><h4>Selecione um dos veículos já cadastrados</h4></legend>
 
-                <option selected="selected" value="">-- Selecione um tipo --</option>
-            </select>
-            <span asp-validation-for="@Model.TipoSelecionado" class="text-danger"></span>
-        </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label asp-for="VeiculoId">Veículos<span class="text-danger">&nbsp;*</span></label>
+                        <select autofocus id="listaVeiculos" class="form-control" 
+                            asp-items="Model.VeiculosCadastrados"
+                            asp-for="VeiculoId">
 
-        <div class="form-group">
-            <label asp-for="Placa">Placa<span class="text-danger">&nbsp;*</span></label>
-            <input class="form-control" asp-for="Placa" type="text"/>
-            <span asp-validation-for="Placa" class="text-danger"></span>
-        </div>
+                            <option value="">-- Selecione --</option>
+                        </select>
+                        <span asp-validation-for="@Model.VeiculosCadastrados" class="text-danger"></span>
+                    </div>
+                </div>
+            </fieldset>
 
-        <div class="form-group">
-            <label asp-for="Modelo">Modelo<span class="text-danger">&nbsp;*</span></label>
-            <input asp-for="Modelo" type="text" class="form-control" />
-            <span asp-validation-for="Modelo" class="text-danger"></span>
-        </div>
+            <fieldset id="cadastrarNovoVeiculo">
+                <legend><h4>Ou cadastre um novo veículo</h4></legend>
 
-        <div class="form-group">
-            <i class='fas fa-tools'></i>&nbsp;
-            <label asp-for="ServicoId">Serviço<span class="text-danger">&nbsp;*</span></label>
-            <select id="listaServicos" class="form-control" asp-for="ServicoId">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label asp-for="TipoSelecionado">Tipo<span class="text-danger">&nbsp;*</span></label>
+                        <select id="listaTipos" class="form-control" 
+                            asp-items="Model.TiposVeiculo"
+                            asp-for="TipoSelecionado">
 
-                <option value="">-- Selecione um serviço --</option>
-            </select>
-            <span asp-validation-for="@Model.ServicoId" class="text-danger"></span>
-        </div>
+                            <option value="">--- Selecione ---</option>
+                        </select>
+                        <span asp-validation-for="@Model.TipoSelecionado" class="text-danger"></span>
+                    </div>
 
-        <div class="form-group">
-            <i class='fas fa-dollar-sign'></i>&nbsp;
-            <label asp-for="Valor">Valor em R$</label>
-            <input readonly type="text" asp-for="Valor" id="valor" class="form-control bg-ligt text-dark font-weight-bold" />
-        </div>
+                    <div class="form-group">
+                        <label asp-for="Placa">Placa<span class="text-danger">&nbsp;*</span></label>
+                        <input class="form-control" asp-for="Placa" type="text"/>
+                        <span asp-validation-for="Placa" class="text-danger"></span>
+                    </div>
 
-        <div class="form-group">
-            <i class='fas fa-calendar-alt'></i>&nbsp;
-            <label asp-for="Data">Data<span class="text-danger">&nbsp;*</span></label>
-            <input type="date" asp-for="Data" class="form-control" />
-            <span asp-validation-for="@Model.Data" class="text-danger"></span>
-        </div>
+                    <div class="form-group">
+                        <label asp-for="Modelo">Modelo<span class="text-danger">&nbsp;*</span></label>
+                        <input asp-for="Modelo" type="text" class="form-control" />
+                        <span asp-validation-for="Modelo" class="text-danger"></span>
+                    </div>
+                </div>
+            </fieldset>
+        }
+        else
+        {
+            <fieldset>
+                <legend><h4>Dados do veículo</h4></legend>
 
-        <div class="form-group">
-            <i class='fas fa-clock'></i>&nbsp;
-            <label asp-for="HorarioId">Horário<span class="text-danger">&nbsp;*</span></label>
-            <select class="form-control"
-                    asp-for="HorarioId"
-                    asp-items="Model.Horarios">
-                <option value="">-- Selecione um horário --</option>
-            </select>
-            <span asp-validation-for="@Model.HorarioId" class="text-danger"></span>
-        </div>
-        
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label asp-for="TipoSelecionado">Tipo<span class="text-danger">&nbsp;*</span></label>
+                        <select id="listaTipos" class="form-control" 
+                            asp-items="Model.TiposVeiculo"
+                            asp-for="TipoSelecionado">
 
-        <div class="form-group">
-            <span asp-validation-for="@Model.ExisteConflito" class="text-danger"></span>
-        </div>
+                            <option value="">--- Selecione ---</option>
+                        </select>
+                        <span asp-validation-for="@Model.TipoSelecionado" class="text-danger"></span>
+                    </div>
 
-        <button type="submit" class="btn btn-outline-primary"><i class='fas fa-plus'></i>&nbsp;&nbsp;Criar OS</button>
+                    <div class="form-group">
+                        <label asp-for="Placa">Placa<span class="text-danger">&nbsp;*</span></label>
+                        <input class="form-control" asp-for="Placa" type="text"/>
+                        <span asp-validation-for="Placa" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Modelo">Modelo<span class="text-danger">&nbsp;*</span></label>
+                        <input asp-for="Modelo" type="text" class="form-control" />
+                        <span asp-validation-for="Modelo" class="text-danger"></span>
+                    </div>
+                </div>
+            </fieldset>
+        }
+
+
+        <fieldset>
+            <legend><h4>Detalhes do serviço</h4></legend>
+
+            <div class="col-md-8">
+                <div class="form-group">
+                    <i class='fas fa-tools'></i>&nbsp;
+                    <label asp-for="ServicoId">Serviço<span class="text-danger">&nbsp;*</span></label>
+                    <select id="listaServicos" class="form-control" asp-for="ServicoId">
+                        <option value="">--- Selecione ---</option>
+                    </select>
+                    <span asp-validation-for="@Model.ServicoId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <i class='fas fa-dollar-sign'></i>&nbsp;
+                    <label asp-for="Valor">Valor em R$</label>
+                    <input readonly type="text" asp-for="Valor" id="valor" class="form-control bg-ligt text-dark font-weight-bold" />
+                </div>
+
+                <div class="form-group">
+                    <i class='fas fa-calendar-alt'></i>&nbsp;
+                    <label asp-for="Data">Data<span class="text-danger">&nbsp;*</span></label>
+                    <input type="date" asp-for="Data" class="form-control" />
+                    <span asp-validation-for="@Model.Data" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <i class='fas fa-clock'></i>&nbsp;
+                    <label asp-for="HorarioId">Horário<span class="text-danger">&nbsp;*</span></label>
+                    <select class="form-control"
+                            asp-for="HorarioId"
+                            asp-items="Model.Horarios">
+                        <option value="">--- Selecione um horário ---</option>
+                    </select>
+                    <span asp-validation-for="@Model.HorarioId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <span asp-validation-for="@Model.ExisteConflito" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-outline-primary"><i class='fas fa-plus'></i>&nbsp;&nbsp;Abrir OS</button>
+
+        </fieldset>
+
     </form>
 </div>
 
