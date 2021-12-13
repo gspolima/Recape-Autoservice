@@ -22,11 +22,11 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label asp-for="VeiculoId">Veículos<span class="text-danger">&nbsp;*</span></label>
-                        <select autofocus id="listaVeiculos" class="form-control" 
+                        <select id="listaVeiculos" class="form-control" 
                             asp-items="Model.VeiculosCadastrados"
                             asp-for="VeiculoId">
 
-                            <option value="">-- Selecione --</option>
+                            <option value="">--- Selecione ---</option>
                         </select>
                         <span asp-validation-for="@Model.VeiculosCadastrados" class="text-danger"></span>
                     </div>
