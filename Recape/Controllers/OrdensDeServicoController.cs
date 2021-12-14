@@ -49,7 +49,7 @@ public class OrdensDeServicoController : Controller
     [HttpPost]
     public async Task<ActionResult> CriarOrdem(NovaOrdemDeServicoViewModel viewModel)
     {
-        var usuarioLogadoId = userManager.GetUserId(User);
+        var usuarioLogadoId = GetIdUsuarioLogado();
 
         if (!ModelState.IsValid)
         {
@@ -66,7 +66,7 @@ public class OrdensDeServicoController : Controller
         if (existeConflitoDeData)
         {
             ModelState.AddModelError(
-                "ExisteConflito",
+                "ExisteConflitoDeHorario",
                 "Horário já reservado para o serviço e data selecionados. Escolha outro horário.");
         }
 
@@ -81,7 +81,7 @@ public class OrdensDeServicoController : Controller
             {
                 ModelState.AddModelError(
                     "Placa",
-                    "Este veículo já existe e pertence a você");
+                    "Este veículo já existe e pertence a você. Selecione-o na lista de veículos");
             }
             else
             {
@@ -126,8 +126,21 @@ public class OrdensDeServicoController : Controller
         return StatusCode(500);
     }
 
+    private SelectList CarregarListaVeiculosCadastrados()
+    {
+        var usuarioId = GetIdUsuarioLogado();
+        if (veiculoService.UsuarioTemVeiculoCadastrado(usuarioId))
+        {
+            var veiculos = veiculoService.GetVeiculosPorProprietarioId(usuarioId);
 
-    private SelectList PopularListaHorarios()
+            return new SelectList(veiculos, "Id", "TipoModeloPlaca");
+        }
+
+        var listaVazia = new List<VeiculoCadastradoViewModel>();
+        return new SelectList(listaVazia);
+    }
+
+    private SelectList CarregarListaHorarios()
     {
         var horarios = horarioRepository.GetHorarios()
             .Select(h => new
@@ -140,7 +153,7 @@ public class OrdensDeServicoController : Controller
         return new SelectList(horarios, "Id", "HoraDoDia");
     }
 
-    private SelectList PopularListaTiposVeiculo()
+    private SelectList CarregarListaTiposVeiculo()
     {
         var tipos = new List<TipoVeiculoViewModel>()
         {
@@ -161,7 +174,13 @@ public class OrdensDeServicoController : Controller
 
     private void PopularListas(NovaOrdemDeServicoViewModel viewModel)
     {
-        viewModel.TiposVeiculo = PopularListaTiposVeiculo();
-        viewModel.Horarios = PopularListaHorarios();
+        viewModel.VeiculosCadastrados = CarregarListaVeiculosCadastrados();
+        viewModel.TiposVeiculo = CarregarListaTiposVeiculo();
+        viewModel.Horarios = CarregarListaHorarios();
+    }
+
+    private string GetIdUsuarioLogado()
+    {
+        return userManager.GetUserId(User);
     }
 }

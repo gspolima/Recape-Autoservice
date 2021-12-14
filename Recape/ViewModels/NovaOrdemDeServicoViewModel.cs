@@ -30,32 +30,11 @@ public class NovaOrdemDeServicoViewModel : DataViewModel
 
     public string Valor { get; set; }
 
-    public bool ExisteConflito { get; set; }
+    public bool ExisteConflitoDeHorario { get; set; }
 
-    public SelectList VeiculosCadastrados { get; set; } = new
-        SelectList(
-            new List<VeiculoCadastrado>()
-            {
-                new VeiculoCadastrado()
-                {
-                    Id = 1,
-                    TipoModeloPlaca = "Carro Fiat Uno 2010 - HPA1406"
-                },
-                new VeiculoCadastrado()
-                {
-                    Id = 2,
-                    TipoModeloPlaca = "Carro VW Gol 2019 - LVY0503"
-                }
-            },
-        "Id",
-        "TipoModeloPlaca");
+    public SelectList VeiculosCadastrados { get; set; }
 
+    [Required(ErrorMessage = "Escolha um veículo")]
     public int VeiculoId { get; set; }
 
-}
-
-public class VeiculoCadastrado
-{
-    public int Id { get; set; }
-    public string TipoModeloPlaca { get; set; }
 }

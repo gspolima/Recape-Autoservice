@@ -11,6 +11,28 @@ public class VeiculoService : IVeiculoService
         this.veiculoRepository = veiculoRepository;
     }
 
+    public List<VeiculoCadastradoViewModel> GetVeiculosPorProprietarioId(string proprietarioId)
+    {
+        var veiculos = veiculoRepository.GetVeiculos()
+            .Where(v => v.ProprietarioId == proprietarioId)
+            .Select(v => new VeiculoCadastradoViewModel
+            {
+                Id = v.Id,
+                TipoModeloPlaca = $"{v.Tipo} {v.Modelo} - {v.Placa}"
+            })
+            .ToList();
+
+        return veiculos;
+    }
+
+    public bool UsuarioTemVeiculoCadastrado(string proprietarioId)
+    {
+        var temVeiculo = veiculoRepository.GetVeiculos()
+            .Any(v => v.ProprietarioId == proprietarioId);
+
+        return temVeiculo;
+    }
+
     public bool VeiculoExiste(string placa)
     {
         var existe = veiculoRepository.GetVeiculos()

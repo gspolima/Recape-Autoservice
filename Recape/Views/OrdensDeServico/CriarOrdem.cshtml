@@ -110,8 +110,13 @@
 
                 <div class="form-group">
                     <i class='fas fa-dollar-sign'></i>&nbsp;
-                    <label asp-for="Valor">Valor em R$</label>
-                    <input readonly type="text" asp-for="Valor" id="valor" class="form-control bg-ligt text-dark font-weight-bold" />
+                    <label asp-for="Valor">Valor</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">R$</div>
+                        </div>
+                        <input readonly type="text" asp-for="Valor" id="valor" class="form-control bg-ligt text-dark font-weight-bold" />
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -133,7 +138,7 @@
                 </div>
 
                 <div class="form-group">
-                    <span asp-validation-for="@Model.ExisteConflito" class="text-danger"></span>
+                    <span asp-validation-for="@Model.ExisteConflitoDeHorario" class="text-danger"></span>
                 </div>
 
             </div>
