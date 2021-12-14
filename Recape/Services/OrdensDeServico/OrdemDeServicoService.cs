@@ -82,15 +82,23 @@ public class OrdemDeServicoService : IOrdemDeServicoService
             Data = viewModel.GetData(),
             ServicoId = viewModel.ServicoId,
             HorarioId = viewModel.HorarioId,
-            Total = viewModel.Valor,
-            Veiculo = new Veiculo()
+            Total = viewModel.Valor
+        };
+
+        if (string.IsNullOrEmpty(viewModel.Placa))
+        {
+            ordem.VeiculoId = viewModel.VeiculoId;
+        }
+        else
+        {
+            ordem.Veiculo = new Veiculo()
             {
                 Placa = viewModel.Placa.ToUpper(),
                 Modelo = viewModel.Modelo,
                 ProprietarioId = clienteId,
                 Tipo = Enum.Parse<TipoVeiculo>(viewModel.TipoSelecionado)
-            }
-        };
+            };
+        }
 
         var sucesso = ordemRepository.Insert(ordem);
 
@@ -150,5 +158,13 @@ public class OrdemDeServicoService : IOrdemDeServicoService
         ordem.Status = Situacao.Cancelado;
 
         return ordemRepository.Update(ordem);
+    }
+
+    public bool ExisteOSAbertaParaVeiculo(int veiculoId)
+    {
+        var existe = ordemRepository.GetOrdensDeServicoPorVeiculoId(veiculoId)
+            .Any(o => o.Status == Situacao.Aberto);
+
+        return existe;
     }
 }

@@ -8,5 +8,6 @@ public interface IOrdemDeServicoRepository
     IQueryable GetHorariosReservadosPorData(DateOnly data);
     bool Insert(OrdemDeServico ordemDeServico);
     bool Exists(int servicoId, DateOnly data, int horarioId);
+    IQueryable<OrdemDeServico> GetOrdensDeServicoPorVeiculoId(int veiculoId);
     bool Update(OrdemDeServico ordem);
 }

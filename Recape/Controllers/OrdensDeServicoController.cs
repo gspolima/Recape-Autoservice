@@ -57,6 +57,16 @@ public class OrdensDeServicoController : Controller
             return View("CriarOrdem", viewModel);
         }
 
+        var veiculoJaPossuiOSEmAberto = ordemService
+            .ExisteOSAbertaParaVeiculo(viewModel.VeiculoId);
+
+        if (veiculoJaPossuiOSEmAberto)
+        {
+            ModelState.AddModelError(
+                "VeiculoId",
+                "Este veículo já possui uma ordem de serviço que está em aberto.");
+        }
+
         var existeConflitoDeData = ordemService
             .verificarDisponibilidade(
                 viewModel.ServicoId,
@@ -70,24 +80,29 @@ public class OrdensDeServicoController : Controller
                 "Horário já reservado para o serviço e data selecionados. Escolha outro horário.");
         }
 
-        var veiculoJaExiste = veiculoService.VeiculoExiste(viewModel.Placa);
-
-        if (veiculoJaExiste)
+        if (!string.IsNullOrEmpty(viewModel.Placa))
         {
-            var pertenceAoUsuarioLogado = veiculoService
-                .VeiculoPertenceAoUsuario(viewModel.Placa, usuarioLogadoId);
+            var veiculoJaExiste = veiculoService.VeiculoExiste(viewModel.Placa);
 
-            if (pertenceAoUsuarioLogado)
+            if (veiculoJaExiste)
             {
-                ModelState.AddModelError(
-                    "Placa",
-                    "Este veículo já existe e pertence a você. Selecione-o na lista de veículos");
-            }
-            else
-            {
-                ModelState.AddModelError(
-                    "Placa",
-                    "Este veículo pertence a outro cliente");
+                var pertenceAoUsuarioLogado = veiculoService
+                    .VeiculoPertenceAoUsuario(viewModel.Placa, usuarioLogadoId);
+
+                if (pertenceAoUsuarioLogado)
+                {
+                    ModelState.AddModelError(
+                        "Placa",
+                        "Este veículo já existe e pertence a você. Selecione-o na lista de veículos");
+                }
+                else
+                {
+                    ModelState.AddModelError(
+                        "Placa",
+                        "Este veículo pertence a outro cliente");
+                }
+
+
             }
         }
 

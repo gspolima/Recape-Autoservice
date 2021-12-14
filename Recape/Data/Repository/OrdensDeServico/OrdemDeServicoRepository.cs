@@ -76,4 +76,12 @@ public class OrdemDeServicoRepository : IOrdemDeServicoRepository
         dbContext.Entry(ordem).State = EntityState.Modified;
         return dbContext.SaveChanges() > 0;
     }
+
+    public IQueryable<OrdemDeServico> GetOrdensDeServicoPorVeiculoId(int veiculoId)
+    {
+        var ordens = dbContext.OrdensDeServico
+            .Where(o => o.VeiculoId == veiculoId);
+
+        return ordens;
+    }
 }

@@ -9,4 +9,5 @@ public interface IOrdemDeServicoService
     bool verificarDisponibilidade(int servicoId, string data, int horarioId);
     bool AtualizarStatusAoAvaliar(int id);
     bool CancelarOS(int id);
+    bool ExisteOSAbertaParaVeiculo(int veiculoId);
 }
