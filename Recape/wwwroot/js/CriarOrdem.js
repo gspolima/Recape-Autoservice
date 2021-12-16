@@ -4,17 +4,18 @@
     let $valorServico = $('#valor');
 
     if (servicoSelecionado !== '')
-        enviarRequest(servicoSelecionado);
+        getValorDoServico(servicoSelecionado);
 
 
     $listaServicos.change(function () {
         const valor = $listaServicos.find('option:selected').val();
         console.log(valor);
-
-        enviarRequest(valor);
+        getValorDoServico(valor);
+        
+        getDataPrevistaDeConclusao(valor);
     });
 
-    function enviarRequest(valor) {
+    function getValorDoServico(valor) {
         $.ajax({
             type: "GET",
             url: `api/valorServico/${valor}`
@@ -25,6 +26,26 @@
             .fail(function (error) {
                 console.error(error);
             });
+    }
+
+    function getDataPrevistaDeConclusao(valor) {
+        $.ajax({
+            type: "GET",
+            url: `api/dataPrevistaServico/${valor}`
+        })
+            .done(function (data) {
+                let dataPrevista = new Date(data);
+                let opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                let formatada = dataPrevista.toLocaleDateString("pt-BR", opcoes);
+                console.log(formatada);
+
+                $fieldSetDetalhesServico.find('#alertaPrevisao').remove();
+                $fieldSetDetalhesServico.append($alerta);
+                $alerta.text(`Previsão de conclusão para ${formatada}`);
+            })
+            .fail(function (error) {
+                console.error(error);
+            })
     }
 
     /*---------------------------------------*/
@@ -99,3 +120,9 @@
         
     });
 });
+
+/*---------------------------------------*/
+
+let $alerta = $("<div id='alertaPrevisao' class='alert alert-primary' role='alert'></div>");
+let $fieldSetDetalhesServico = $('#detalhesServico');
+

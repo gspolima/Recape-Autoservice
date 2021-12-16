@@ -13,12 +13,27 @@ public class ServicoService : IServicoService
 
     public decimal GetValorPorServicoId(int id)
     {
-        var valor = servicoRepository.GetServicos()
-            .Where(s => s.Id == id)
+        var valor = servicoRepository.GetServicoPorId(id)
             .Select(s => new { Valor = s.Valor })
             .FirstOrDefault();
 
         return valor.Valor;
+    }
+
+    public TimeSpan GetTempoDeExecucaoPorServicoId(int servicoId)
+    {
+        var servico = servicoRepository.GetServicoPorId(servicoId)
+            .Select(s => new Servico
+            {
+                TempoDeExecucao = s.TempoDeExecucao
+            })
+            .FirstOrDefault();
+
+        if (servico != null)
+            return servico.TempoDeExecucao;
+
+        return new TimeSpan(0, 0, 0);
+
     }
 
     public List<ServicoViewModel> GetListaDeServicos(string tipoVeiculo)

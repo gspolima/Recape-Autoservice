@@ -42,6 +42,17 @@ public class OrdensDeServicoApiController : ControllerBase
 
     }
 
+    [HttpGet("dataPrevistaServico/{servicoId}")]
+    public IActionResult GetDataPrevistaDeConclusao(int servicoId)
+    {
+        var tempoDeExecucao = servicoService.GetTempoDeExecucaoPorServicoId(servicoId);
+        var dataAtual = DateTime.Now;
+
+        var dataPrevista = dataAtual.Add(tempoDeExecucao);
+
+        return Ok(dataPrevista);
+    }
+
     [HttpPost("cancelar/{ordemId}")]
     public IActionResult CancelarOS(int ordemId)
     {
